@@ -1,12 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+
+let verifyToken = require('./middlewares/verifyToken');
+
 const app = express();
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-const mongoose = require('mongoose');
 
-const{PORT, DATABASE_URL} = require('./config');
+const {router: usersRouter} = require('./users');
+
+const {User} = require('./users/models');
+
+mongoose.Promise = global.Promise;
+
+const{PORT, DATABASE_URL, jwt_secret} = require('./config');
 
 const medicationSchema = mongoose.Schema({
 
@@ -32,7 +44,40 @@ medicationSchema.methods.apiRepr = function() {
 
 const Medication = mongoose.model('Medication', medicationSchema);
 
-app.post('/medications', (req, res) => {
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res) => {
+	res.render('index')
+});
+
+app.get('/login', (req, res) => {
+	res.render('login')
+});
+
+app.get('/medications', verifyToken, (req, res) => {
+	const filters = {};
+	console.log(req.query)
+	if (req.query.name) {
+		filters['name'] = req.query['name'];
+	}
+	console.log(filters)
+	Medication
+		.find(filters)
+		.limit(15)
+		.exec()
+		.then(medications => {
+			res.json({
+				medications: medications.map(
+					(medication) => medication.apiRepr())
+			});
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({message: 'Internal server error'})
+		});
+});
+
+app.post('/medications', verifyToken, (req, res) => {
 	const requiredFields = ['name', 'dose', 'timing'];
 	for (let i=0; i<requiredFields.length; i++) {
 		const field = requiredFields[i];
@@ -57,30 +102,8 @@ console.log('here we are');
 		})
 });
 
-app.get('/medications', (req, res) => {
-	const filters = {};
-	console.log(req.query)
-	if (req.query.name) {
-		filters['name'] = req.query['name'];
-	}
-	console.log(filters)
-	Medication
-		.find(filters)
-		.limit(15)
-		.exec()
-		.then(medications => {
-			res.json({
-				medications: medications.map(
-					(medication) => medication.apiRepr())
-			});
-		})
-		.catch(err => {
-			console.error(err);
-			res.status(500).json({message: 'Internal server error'})
-		});
-});
 
-app.put('/medications/:id', (req, res) => {
+app.put('/medications/:id', verifyToken, (req, res) => {
 	if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 		const message = (
 			`Request path id (${req.params.id}) and request body id` + 
@@ -105,12 +128,47 @@ app.put('/medications/:id', (req, res) => {
 		.catch(err => res.status(500).json({message: 'Internal server error'}))
 });
 
-app.delete('/medications/:id', (req, res) => {
+app.delete('/medications/:id', verifyToken,(req, res) => {
 	Medication
 		.findByIdAndRemove(req.params.id)
 		.exec()
 		.then(() => res.status(204).end())
 		.catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
+app.post('/authenticate',(req, res) => {
+	console.log(req.body);
+	User
+	.findOne({username: req.body.username, password: req.body.password})
+	.lean()
+	.exec()
+	.then(user => {
+		if(!user){
+			return res.status(404).json({'message': 'User not found'})
+		}
+		let token = jwt.sign(user, jwt_secret, {
+			expiresIn: "1440m"
+		});
+		res.json({error:false, token: token});
+	})
+	.catch(err => {
+		console.log(err)
+		res.status(500).json({message: 'Failed misserably'})
+	})
+});
+
+app.post('/signup', (req,res) => {
+	let user = new User({
+		username: req.body.username, 
+		password: req.body.password
+	});
+	user.save(function(err, data){
+		if(err){
+			console.log(err);
+			return res.json({error: true, message: 'Unsuccessful'})
+		}
+		res.json({error: false, message: 'New user created'})
+	})
 });
 
 let server;
