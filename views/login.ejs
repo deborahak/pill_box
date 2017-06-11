@@ -13,16 +13,22 @@
 
     <%- include('partials/navbar') %>
 
+<form class="form-inline" id='login'>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" >
+  </div>
+  <button type="submit" id="submitLogin" class="btn btn-default">Login</button>
 
-  	<form name="login" action="/authenticate" method="post">
-  		Username: <input type="text" name="username">
-  		Password: <input type="text" name="password">
-  		<input type="submit">
-  	</form>   
+</form>
 
   
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+ <%- include('partials/scripts') %>
+
 </body>
 
 </html>

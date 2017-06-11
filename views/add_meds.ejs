@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <%- include('partials/authenticated_navbar') %>
+
+<form>
+    <div class="form-group" id='add-med'>
+    <label for='medName'>Name of Medication</label>
+    <input type="name" class="form-control" id="medName">
+    </div>
+    <div class="form-group" id='dose'>
+    <label for='medDose'>Dosage</label>
+    <input type="dosage" class="form-control" id="medDose">
+    </div>
+    <div class="form-group" id='timing'>
+    <label for='medTime'>Time to Take Medication</label>
+    <input type="timing" class="form-control" id="medTime">
+    </div>
+    <div class="form-group" id='description'>
+    <label for='medDescription'>Description of Medication</label>
+    <input type="description" class="form-control" id="medDescription">
+    </div>
+    <button type="submit" class="btn btn-default" id="addMed">Add the Med</button>
+</form>
+	
+
+    <%- include('partials/scripts') %>
+    <script src="js/add_meds.js"></script>
+
+</body>
+</html>

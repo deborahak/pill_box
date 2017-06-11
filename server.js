@@ -46,6 +46,8 @@ const Medication = mongoose.model('Medication', medicationSchema);
 
 app.set('view engine', 'ejs');
 
+
+/// TEMPLATE VIEWS!
 app.get('/', (req, res) => {
 	res.render('index')
 });
@@ -53,8 +55,13 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
 	res.render('login')
 });
+app.get('/medications', (req, res) => res.render('medications'))
 
-app.get('/medications', verifyToken, (req, res) => {
+app.get('/add_meds', (req, res) =>{
+	res.render('add_meds')
+});
+/// API Endpoints!!!
+app.get('/api/medications', verifyToken, (req, res) => {
 	const filters = {};
 	console.log(req.query)
 	if (req.query.name) {
@@ -66,7 +73,7 @@ app.get('/medications', verifyToken, (req, res) => {
 		.limit(15)
 		.exec()
 		.then(medications => {
-			res.json({
+			res.json({error: false,
 				medications: medications.map(
 					(medication) => medication.apiRepr())
 			});
@@ -77,8 +84,8 @@ app.get('/medications', verifyToken, (req, res) => {
 		});
 });
 
-app.post('/medications', verifyToken, (req, res) => {
-	const requiredFields = ['name', 'dose', 'timing'];
+app.post('/api/medications', verifyToken, (req, res) => {
+	const requiredFields = ['name', 'dose', 'timing', 'description'];
 	for (let i=0; i<requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -87,7 +94,7 @@ app.post('/medications', verifyToken, (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
-console.log('here we are');
+
 	Medication
 		.create({
 			name: req.body.name,
@@ -103,7 +110,7 @@ console.log('here we are');
 });
 
 
-app.put('/medications/:id', verifyToken, (req, res) => {
+app.put('/api/medications/:id', verifyToken, (req, res) => {
 	if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 		const message = (
 			`Request path id (${req.params.id}) and request body id` + 
@@ -128,7 +135,7 @@ app.put('/medications/:id', verifyToken, (req, res) => {
 		.catch(err => res.status(500).json({message: 'Internal server error'}))
 });
 
-app.delete('/medications/:id', verifyToken,(req, res) => {
+app.delete('/api/medications/:id', verifyToken,(req, res) => {
 	Medication
 		.findByIdAndRemove(req.params.id)
 		.exec()
@@ -136,7 +143,7 @@ app.delete('/medications/:id', verifyToken,(req, res) => {
 		.catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-app.post('/authenticate',(req, res) => {
+app.post('/api/authenticate',(req, res) => {
 	console.log(req.body);
 	User
 	.findOne({username: req.body.username, password: req.body.password})
@@ -157,7 +164,7 @@ app.post('/authenticate',(req, res) => {
 	})
 });
 
-app.post('/signup', (req,res) => {
+app.post('/api/signup', (req,res) => {
 	let user = new User({
 		username: req.body.username, 
 		password: req.body.password
