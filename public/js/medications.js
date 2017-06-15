@@ -1,7 +1,4 @@
 $(document).ready(function() {
-    var token = localStorage.getItem("token");
-
-
     /// if there is no token, (a.k.a. logged out)
     /// redirect the person to the login page!!!!
     $.getJSON('/api/medications?token=' + token, function(data) {

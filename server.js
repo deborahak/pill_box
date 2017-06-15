@@ -20,29 +20,6 @@ mongoose.Promise = global.Promise;
 
 const{PORT, DATABASE_URL, jwt_secret} = require('./config');
 
-const medicationSchema = mongoose.Schema({
-
-	name: {type: String, required: true, unique: true},
-	dose: {type: String, required: true},
-	timing: {type: String, required: true},
-	description: {
-		color: String,
-		shape: String,
-		markings: String
-	}
-})
-
-medicationSchema.methods.apiRepr = function() {
-	return {
-		id: this._id,
-		name: this.name,
-		dose: this.dose,
-		timing: this.timing,
-		description: this.description
-	};
-}
-
-const Medication = mongoose.model('Medication', medicationSchema);
 
 app.set('view engine', 'ejs');
 
@@ -50,6 +27,10 @@ app.set('view engine', 'ejs');
 /// TEMPLATE VIEWS!
 app.get('/', (req, res) => {
 	res.render('index')
+});
+
+app.get('/signup', (req,res) => {
+	res.render('signup')
 });
 
 app.get('/login', (req, res) => {
@@ -67,21 +48,27 @@ app.get('/api/medications', verifyToken, (req, res) => {
 	if (req.query.name) {
 		filters['name'] = req.query['name'];
 	}
-	console.log(filters)
-	Medication
-		.find(filters)
-		.limit(15)
-		.exec()
-		.then(medications => {
-			res.json({error: false,
-				medications: medications.map(
-					(medication) => medication.apiRepr())
-			});
-		})
-		.catch(err => {
-			console.error(err);
-			res.status(500).json({message: 'Internal server error'})
-		});
+	console.log(req.decoded, 'what is this?');
+	const { username} = req.decoded;
+	User.findOne({username}) // User.find( { username: username })
+	.exec()
+	.then(user => {
+		res.json({error: false, medications: user.medications});
+	}).catch(err => res.status(500).json({message: "Internal server error"}));;
+	// Medication
+	// 	.find(filters)
+	// 	.limit(15)
+	// 	.exec()
+	// 	.then(medications => {
+	// 		res.json({error: false,
+	// 			medications: medications.map(
+	// 				(medication) => medication.apiRepr())
+	// 		});
+	// 	})
+	// 	.catch(err => {
+	// 		console.error(err);
+	// 		res.status(500).json({message: 'Internal server error'})
+	// 	});
 });
 
 app.post('/api/medications', verifyToken, (req, res) => {
@@ -94,6 +81,14 @@ app.post('/api/medications', verifyToken, (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
+	/*
+	Notes: When dealing with a subdoc
+	- get the parent (user)first.
+	- we push the new information into the user.
+	- we save the parent (user)
+	*/
+
+	console.log(req.decoded, 'What is this?');
 
 	Medication
 		.create({
@@ -144,7 +139,6 @@ app.delete('/api/medications/:id', verifyToken,(req, res) => {
 });
 
 app.post('/api/authenticate',(req, res) => {
-	console.log(req.body);
 	User
 	.findOne({username: req.body.username, password: req.body.password})
 	.lean()
@@ -156,6 +150,7 @@ app.post('/api/authenticate',(req, res) => {
 		let token = jwt.sign(user, jwt_secret, {
 			expiresIn: "1440m"
 		});
+
 		res.json({error:false, token: token});
 	})
 	.catch(err => {

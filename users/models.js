@@ -3,6 +3,31 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
+const medicationSchema = mongoose.Schema({
+
+	name: {type: String, required: true, unique: true},
+	dose: {type: String, required: true},
+	timing: {type: String, required: true},
+	description: {
+		color: String,
+		shape: String,
+		markings: String
+	}
+})
+
+medicationSchema.methods.apiRepr = function() {
+	return {
+		id: this._id,
+		name: this.name,
+		dose: this.dose,
+		timing: this.timing,
+		description: this.description
+	};
+}
+
+// const Medication = mongoose.model('Medication', medicationSchema);
+
+
 const UserSchema = mongoose.Schema({
 	username: {
 		type: String,
@@ -14,7 +39,8 @@ const UserSchema = mongoose.Schema({
 		required: true
 	},
 	firstName: {type: String, default: ""},
-	lastName: {type: String, default: ""}
+	lastName: {type: String, default: ""},
+	medications: [medicationSchema]
 });
 
 UserSchema.methods.apiRepr = function() {

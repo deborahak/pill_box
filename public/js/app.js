@@ -1,4 +1,9 @@
+var token = localStorage.getItem('token');
+
 $(document).ready(function() {
+
+	// we get the token!!!
+
 
     $('#submitLogin').click(function(event) {
         event.preventDefault();

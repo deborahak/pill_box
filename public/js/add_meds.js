@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	console.log('do we work?');
+
 	$('#addMed').on('click', function(event){
 		event.preventDefault();
 		var medName = $('#medName').val();
@@ -9,7 +10,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: 'POST',
-			url: '/api/medications',
+			url: '/api/medications?token=' + token,
 			data: { name: medName, dose: medDose, timing: medTime, description: medDescription},
 			dataType:'json'
 		}).done(function(data){
