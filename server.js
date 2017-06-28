@@ -41,6 +41,13 @@ app.get('/medications', (req, res) => res.render('medications'))
 app.get('/add_meds', (req, res) =>{
 	res.render('add_meds')
 });
+// app.get('/edit_meds/:id', (req,res)=> {
+// 	// res.render('edit_meds', {
+// 	// 	id: req.params.id
+// 	// })
+// 	res.render('medications');
+// });
+
 /// API Endpoints!!!
 app.get('/api/medications', verifyToken, (req, res) => {
 	const filters = {};
@@ -49,7 +56,7 @@ app.get('/api/medications', verifyToken, (req, res) => {
 		filters['name'] = req.query['name'];
 	}
 	console.log(req.decoded, 'what is this?');
-	const { username} = req.decoded;
+	const {username} = req.decoded;
 	User.findOne({username}) // User.find( { username: username })
 	.exec()
 	.then(user => {
@@ -90,18 +97,55 @@ app.post('/api/medications', verifyToken, (req, res) => {
 
 	console.log(req.decoded, 'What is this?');
 
-	Medication
-		.create({
-			name: req.body.name,
-			dose: req.body.dose,
-			timing: req.body.timing,
-			description: req.body.description})
-		.then(
-			medication => res.status(201).json(medication))
-		.catch(err => {
-			console.error(err);
-			res.status(500).json({message: "Entry already exists"})
+	const {username} = req.decoded;
+	User.findOne({username})
+	.exec()
+	.then(user => {
+		// user -> parent
+		// parent.children.push
+		user.medications.push({
+			name:req.body.name,
+			dose:req.body.dose,
+			timing:req.body.timing,
+			description:req.body.description});
+		// pick out the last medication
+		const medication = user.medications[user.medications.length-1];
+
+		/* aside, hypothetical */
+		// var arr = [1,2,3,8];
+		 // where the last thing is "located"?
+		 // arr[3] -> 
+		 // tips: arr.length -> the size of the array (counts the items)
+		 // length not position/index.
+		 // Position: 3 ==> eight!!
+		 // length: 4 - 1
+
+		 // LENGHT - 1;
+		 // arr[arr.length-1];
+
+
+		user.save(function(err){
+			if(err) return res.status(500).json({message:"Medication already listed."})
+			res.status(201).json(medication)			
+
 		})
+		// res.json({error: false, medications: user.medications});
+	})
+	.catch(err => res.status(500).json({message:"Internal server error"}))
+
+
+	// Medication
+	// 	.create({
+	// 		name: req.body.name,
+	// 		dose: req.body.dose,
+	// 		timing: req.body.timing,
+	// 		description: req.body.description})
+	// 	.then(
+	// 		medication => res.status(201).json(medication))
+	// 	.catch(err => {
+	// 		console.error(err);
+	// 		res.status(500).json({message: "Entry already exists"})
+	// 	})
 });
 
 
@@ -131,6 +175,8 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
 });
 
 app.delete('/api/medications/:id', verifyToken,(req, res) => {
+	const {username} = req.decoded;
+	User.findOne({username}) 
 	Medication
 		.findByIdAndRemove(req.params.id)
 		.exec()
@@ -138,7 +184,19 @@ app.delete('/api/medications/:id', verifyToken,(req, res) => {
 		.catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
+app.get('/api/medications/:id', verifyToken, (req, res) => {
+	const {username}= req.decoded; // username = req.decoded.username; 
+	User.findOne({username}) // {username: username}
+	.exec()
+	.then((user) => {
+		const medication = user.medications.id(req.params.id);
+		res.json(medication);
+	})
+	.catch(err => res.status(500).json({message: 'Internal server error'}))
+});
+
 app.post('/api/authenticate',(req, res) => {
+
 	User
 	.findOne({username: req.body.username, password: req.body.password})
 	.lean()

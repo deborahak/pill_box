@@ -16,9 +16,72 @@
 
 		</ul>
 
-	<a href="/add_meds" class="btn btn-primary">Add Medication</a>
-    
+        <a href="/add_meds" class='btn btn-danger'>Add Medication</a>
+	<!--<button data-toggle="modal" data-target="#myModalHorizontal" class="btn btn-primary">Delete Medication</button> -->
+	
     </div>
+<div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Edit Medication
+                </h4>
+            </div>
+            <div class="modal-body">
+                
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                              for="name">Name</label>
+                    <div class="col-sm-10">
+                        <input type="name" class="form-control" 
+                        id="inputName" placeholder="Name"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                          for="dose" >Dosage</label>
+                    <div class="col-sm-10">
+                        <input type="dose" class="form-control"
+                            id="inputDose" placeholder="Dose"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                              for="timing">Timing</label>
+                    <div class="col-sm-10">
+                        <input type="timing" class="form-control" 
+                        id="inputTiming" placeholder="Timing"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                              for="description">Description</label>
+                    <div class="col-sm-10">
+                        <input type="description" class="form-control" 
+                        id="inputDescription" placeholder="Description"/>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                            Close
+                </button>
+                <button type="button" class="btn btn-danger">Delete Med</button>
+                <button type="button" class="btn btn-primary">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>
 	<%- include('partials/scripts') %>
     <script src="js/medications.js"></script>
 

@@ -8,10 +8,10 @@ const medicationSchema = mongoose.Schema({
 	name: {type: String, required: true, unique: true},
 	dose: {type: String, required: true},
 	timing: {type: String, required: true},
-	description: {
-		color: String,
-		shape: String,
-		markings: String
+	description: {type: String, required: true
+	//	color: String,
+	//	shape: String,
+	//	markings: String
 	}
 })
 
