@@ -19,6 +19,27 @@ $(document).ready(function() {
 
     });
 
+    $('#save-med').on('click', function(event) {
+        event.preventDefault();
+        var medName = $('#inputName').val();
+        var medDose = $('#inputDose').val();
+        var medTime = $('#inputTiming').val();
+        var medDescription = $('#inputDescription').val();
+        var id = $('#medication-id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/medications/' + id + '?token=' + token,
+            data: { name: medName, 
+                dose: medDose, 
+                timing: medTime, 
+                description: medDescription },
+            dataType: 'json'
+        }).done(function(data) {
+            location.href = '/medications';
+        })
+    })
+
     /// When an a tag is clicked, can we get a simple alert to show up!
     // hints: (refresher)
     // use the click listener!
@@ -30,12 +51,7 @@ $(document).ready(function() {
 
         var id = this.id;
         $("#myModalHorizontal").modal();
-        $("#inputName").val("asprin");
-        $("#inputDose").val("200ml");
-        $("#inputTiming").val("twice a day");
-        $("#inputDescription").val("white");
-
-
+        
         $.getJSON('/api/medications/' + id + '?token=' + token, function(data) {
             // check for the data property error being true!
             // if it is true, redirect the individual to login page!
@@ -50,9 +66,12 @@ $(document).ready(function() {
             $("#inputDose").val(data.dose);
             $("#inputTiming").val(data.timing);
             $("#inputDescription").val(data.description);
+            // input --> hidden!!!
+            $("#medication-id").val(id);
 
         });
 
     });
+
 
 });
