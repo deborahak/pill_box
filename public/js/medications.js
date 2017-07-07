@@ -38,7 +38,19 @@ $(document).ready(function() {
         }).done(function(data) {
             location.href = '/medications';
         })
-    })
+    });
+
+    $('#delete-med').on('click', function(event){
+        event.preventDefault();
+        var id = $('#medication-id').val();
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/medications/' + id +'?token=' + token,
+            dataType: 'json'
+        }).done(function(data){
+            location.href = '/medications';
+        })
+    });
 
     /// When an a tag is clicked, can we get a simple alert to show up!
     // hints: (refresher)

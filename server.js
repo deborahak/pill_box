@@ -167,25 +167,24 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
         }
     });
     const { username } = req.decoded;
-    User.findOne({ username
- })
+    User.findOne({ username })
         .exec()
         .then(user => {
 
             let medication = user.medications.id(req.params.id);
             console.log(req.body);
-			medication.name=req.body.name;
-			medication.dose=req.body.dose;
-			medication.timing=req.body.timing;
-			medication.description=req.body.description;
+            medication.name = req.body.name;
+            medication.dose = req.body.dose;
+            medication.timing = req.body.timing;
+            medication.description = req.body.description;
             user.save((err) => {
-            	if (err){
-            		console.log(err);
-            		return res.status(500).json({message: 'Internal server error'})
-            	}
-            	return res.json(medication);
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({ message: 'Internal server error' })
+                }
+                return res.json(medication);
             });
-            
+
         })
         .catch(err => res.status(500).json({ message: 'Internal server error' }))
         // 		.exec()
@@ -195,11 +194,24 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
 
 app.delete('/api/medications/:id', verifyToken, (req, res) => {
     const { username } = req.decoded;
-    User.findOne({ username })
+    User.update({
+            username
+        }, { "$pull": { "medications": { "_id": req.params.id } } },
+        (err, numAffected) => {
+            if (err) {
+                return res.status(500).json({ message: 'Internal server error' })
+            }
+            return res.json({message: 'You have successfully deleted this medication'})
+        }
+    )
 
-    .exec()
-        .then(() => res.status(204).end())
-        .catch(err => res.status(500).json({ message: 'Internal server error' }));
+    // User.findOne({ username })
+    // .exec()
+    // .then((user) => {
+
+    // 	res.status(204).end()
+    // })
+    // .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
 
 app.get('/api/medications/:id', verifyToken, (req, res) => {
@@ -248,7 +260,7 @@ app.post('/api/signup', (req, res) => {
             console.log(err);
             return res.json({ error: true, message: 'Unsuccessful' })
         }
-        res.json({ error: false, message: 'New user created' })
+        res.status(201).json({ error: false, message: 'New user created' })
     })
 });
 
@@ -290,3 +302,10 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
+
+module.exports = {app, runServer, closeServer};
+
+
+
+
+
