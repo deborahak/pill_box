@@ -10,7 +10,7 @@
 a,
 a:focus,
 a:hover {
-  color: black;
+  color: #678BB0;
 }
 
 /* Custom default button */
@@ -19,8 +19,18 @@ a:hover {
 .btn-default:focus {
   color: black;
   text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #4A89C9;
-  border: 1px solid #4A89C9;
+  background-color: #A2E37C;
+  border: 1px solid black;
+}
+#delete-med {
+  background-color: #92D769;
+  color: black;
+  border: 1px solid black;
+}
+#save-med {
+  background-color: #7EC654;
+  color: black;
+  border: 1px solid black;
 }
 
 
@@ -31,12 +41,10 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #33AC70;
-}
-body {
-  color: #fff;
+  background-color: #fff;
+  color: #62b399;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
 }
 
 form {
@@ -46,14 +54,14 @@ form {
   padding-right: 30%;
 }
 
-/* Extra markup and styles for table-esque vertical and horizontal centering */
+// /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;
   width: 100%;
   height: 100%; /* For at least Firefox */
   min-height: 100%;
-  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+  -webkit-box-shadow: inset 0 0 0px rgba(0,0,0,.5);
+          box-shadow: inset 0 0 0px rgba(0,0,0,.5);
 }
 .site-wrapper-inner {
   display: table-cell;
@@ -64,15 +72,15 @@ form {
   margin-left: auto;
 }
 
-/* Padding for spacing */
+// /* Padding for spacing */
 .inner {
   padding: 30px;
 }
 
 
-/*
- * Header
- */
+// /*
+//  * Header
+//  */
 .masthead-brand {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -89,8 +97,7 @@ form {
   padding-left: 0;
   font-size: 16px;
   font-weight: bold;
-  color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.75);
+  color: #678bb0; /* IE8 proofing */
   border-bottom: 2px solid transparent;
 }
 .masthead-nav > li > a:hover,
@@ -120,14 +127,6 @@ form {
  * Cover
  */
 
-.cover {
-  padding: 0 20px;
-}
-.cover .btn-lg {
-  padding: 10px 20px;
-  font-weight: bold;
-}
-
 
 /*
  * Footer
@@ -136,6 +135,14 @@ form {
 .mastfoot {
   color: #999; /* IE8 proofing */
   color: rgba(255,255,255,.5);
+}
+
+.cover {
+  padding: 0 20px;
+}
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
 }
 
 
