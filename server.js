@@ -51,11 +51,9 @@ app.get('/add_meds', (req, res) => {
 /// API Endpoints!!!
 app.get('/api/medications', verifyToken, (req, res) => {
     const filters = {};
-    console.log(req.query)
     if (req.query.name) {
         filters['name'] = req.query['name'];
     }
-    console.log(req.decoded, 'what is this?');
     const { username } = req.decoded;
     User.findOne({ username }) // User.find( { username: username })
         .exec()
@@ -94,8 +92,6 @@ app.post('/api/medications', verifyToken, (req, res) => {
     - we push the new information into the user.
     - we save the parent (user)
     */
-
-    //console.log(req.decoded, 'What is this?');
 
     const { username } = req.decoded;
     User.findOne({ username })
@@ -172,7 +168,6 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
         .then(user => {
 
             let medication = user.medications.id(req.params.id);
-            console.log(req.body);
             medication.name = req.body.name;
             medication.dose = req.body.dose;
             medication.timing = req.body.timing;
@@ -194,9 +189,9 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
 
 app.delete('/api/medications/:id', verifyToken, (req, res) => {
     const { username } = req.decoded;
-    User.update({
-            username
-        }, { "$pull": { "medications": { "_id": req.params.id } } },
+    User.update(
+        { username}, 
+        { "$pull": { "medications": { "_id": req.params.id } } },
         (err, numAffected) => {
             if (err) {
                 return res.status(500).json({ message: 'Internal server error' })
