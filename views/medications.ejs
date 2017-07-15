@@ -4,22 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>Medications</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="">
+
 	<%- include('partials/authenticated_navbar') %>
 
-		<ul id="medications" class="list-group">
+<div class='container'>
+		<ul id="medications" class="list-group"></ul>
 
-		</ul>
-
-        <a href="/add_meds" class='btn btn-danger'>Add Medication</a>
-	<!--<button data-toggle="modal" data-target="#myModalHorizontal" class="btn btn-primary">Delete Medication</button> -->
-	
-    </div>
+    <a href="/add_meds" class='btn btn-default'>Add Medication</a>
+</div>
 <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -70,19 +67,24 @@
 
                     <input type="hidden" id="medication-id" value="">
                   </div>
-                  <div class="modal-footer">
+              <div class="modal-footer">
                 <button type="button" class="btn btn-default"
                         data-dismiss="modal">
                             Close
                 </button>
-                <button type="button" class="btn btn-danger" id="delete-med">Delete Med</button>
-                <button type="button" class="btn btn-primary" id="save-med">
-                    Save Changes
+                <button type="button" class="btn btn" id="delete-med">Delete Med</button>
+                <button type="button" class="btn btn" id="save-med">
+                    Save
                 </button>
-            </div>
+              </div>
         </div>
     </div>
     
+</div>
+</form>
+</div>
+</div>
+</div>
 </div>
 	<%- include('partials/scripts') %>
     <script src="js/medications.js"></script>
