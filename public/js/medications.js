@@ -72,7 +72,7 @@ $(document).ready(function() {
             // if (data.error === true) {
             //     // remove the old token
             //     localStorage.removeItem('token');
-             //     location.href = '/login';
+            //     location.href = '/login';
             // }
             $("#inputName").val(data.name);
             $("#inputDose").val(data.dose);
