@@ -41,17 +41,21 @@ app.get('/medications', (req, res) => res.render('medications'))
 app.get('/add_meds', (req, res) => {
     res.render('add_meds')
 });
+app.get('/schedule', (req, res) => {
+    res.render('schedule')
+});
 // app.get('/edit_meds/:id', (req,res)=> {
-// 	// res.render('edit_meds', {
-// 	// 	id: req.params.id
-// 	// })
-// 	res.render('medications');
+//  // res.render('edit_meds', {
+//  //  id: req.params.id
+//  // })
+//  res.render('medications');
 // });
 
 /// API Endpoints!!!
 app.get('/api/medications', verifyToken, (req, res) => {
     const filters = {};
     if (req.query.name) {
+        // TODO -> figure out if you need to filter a medication
         filters['name'] = req.query['name'];
     }
     const { username } = req.decoded;
@@ -61,23 +65,24 @@ app.get('/api/medications', verifyToken, (req, res) => {
             res.json({ error: false, medications: user.medications });
         }).catch(err => res.status(500).json({ message: "Internal server error" }));;
     // Medication
-    // 	.find(filters)
-    // 	.limit(15)
-    // 	.exec()
-    // 	.then(medications => {
-    // 		res.json({error: false,
-    // 			medications: medications.map(
-    // 				(medication) => medication.apiRepr())
-    // 		});
-    // 	})
-    // 	.catch(err => {
-    // 		console.error(err);
-    // 		res.status(500).json({message: 'Internal server error'})
-    // 	});
+    //  .find(filters)
+    //  .limit(15)
+    //  .exec()
+    //  .then(medications => {
+    //      res.json({error: false,
+    //          medications: medications.map(
+    //              (medication) => medication.apiRepr())
+    //      });
+    //  })
+    //  .catch(err => {
+    //      console.error(err);
+    //      res.status(500).json({message: 'Internal server error'})
+    //  });
 });
 
 app.post('/api/medications', verifyToken, (req, res) => {
-    const requiredFields = ['name', 'dose', 'timing', 'description'];
+    console.log(req.body);
+    const requiredFields = ['name', 'dose', 'timing[]', 'description'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -102,46 +107,41 @@ app.post('/api/medications', verifyToken, (req, res) => {
             user.medications.push({
                 name: req.body.name,
                 dose: req.body.dose,
-                timing: req.body.timing,
+                timing: req.body['timing[]'],
                 description: req.body.description
             });
             // pick out the last medication
             const medication = user.medications[user.medications.length - 1];
 
-            /* aside, hypothetical */
-            // var arr = [1,2,3,8];
-            // where the last thing is "located"?
-            // arr[3] -> 
-            // tips: arr.length -> the size of the array (counts the items)
-            // length not position/index.
-            // Position: 3 ==> eight!!
-            // length: 4 - 1
-
-            // LENGHT - 1;
-            // arr[arr.length-1];
-
             user.save(function(err) {
-                    if (err) return res.status(500).json({ message: "Medication already listed." })
-                    res.status(201).json(medication)
 
-                })
-                // res.json({error: false, medications: user.medications});
+                if (err) {
+                    console.log(err, 'error')
+                    return res.status(500).json({ message: "Medication already listed." })
+                }
+                res.status(201).json(medication)
+
+            })
+            // res.json({error: false, medications: user.medications});
         })
-        .catch(err => res.status(500).json({ message: "Internal server error" }))
+        .catch(err => {
+            //console.log(err, 'error');
+            res.status(500).json({ message: "Internal server error" })
+        })
 
 
     // Medication
-    // 	.create({
-    // 		name: req.body.name,
-    // 		dose: req.body.dose,
-    // 		timing: req.body.timing,
-    // 		description: req.body.description})
-    // 	.then(
-    // 		medication => res.status(201).json(medication))
-    // 	.catch(err => {
-    // 		console.error(err);
-    // 		res.status(500).json({message: "Entry already exists"})
-    // 	})
+    //  .create({
+    //      name: req.body.name,
+    //      dose: req.body.dose,
+    //      timing: req.body.timing,
+    //      description: req.body.description})
+    //  .then(
+    //      medication => res.status(201).json(medication))
+    //  .catch(err => {
+    //      console.error(err);
+    //      res.status(500).json({message: "Entry already exists"})
+    //  })
 });
 
 
@@ -170,7 +170,7 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
             let medication = user.medications.id(req.params.id);
             medication.name = req.body.name;
             medication.dose = req.body.dose;
-            medication.timing = req.body.timing;
+            medication.timing = req.body['timing[]'];
             medication.description = req.body.description;
             user.save((err) => {
                 if (err) {
@@ -182,21 +182,19 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
 
         })
         .catch(err => res.status(500).json({ message: 'Internal server error' }))
-        // 		.exec()
-        // 		.then(medication => res.status(204).end())
-        // 		.catch(err => res.status(500).json({message: 'Internal server error'}))
+    //      .exec()
+    //      .then(medication => res.status(204).end())
+    //      .catch(err => res.status(500).json({message: 'Internal server error'}))
 });
 
 app.delete('/api/medications/:id', verifyToken, (req, res) => {
     const { username } = req.decoded;
-    User.update(
-        { username}, 
-        { "$pull": { "medications": { "_id": req.params.id } } },
+    User.update({ username }, { "$pull": { "medications": { "_id": req.params.id } } },
         (err, numAffected) => {
             if (err) {
                 return res.status(500).json({ message: 'Internal server error' })
             }
-            return res.json({message: 'You have successfully deleted this medication'})
+            return res.json({ message: 'You have successfully deleted this medication' })
         }
     )
 
@@ -204,7 +202,7 @@ app.delete('/api/medications/:id', verifyToken, (req, res) => {
     // .exec()
     // .then((user) => {
 
-    // 	res.status(204).end()
+    //  res.status(204).end()
     // })
     // .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
@@ -298,9 +296,4 @@ if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
 
-module.exports = {app, runServer, closeServer};
-
-
-
-
-
+module.exports = { app, runServer, closeServer };

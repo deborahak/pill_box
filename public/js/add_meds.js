@@ -11,7 +11,7 @@ $(document).ready(function(){
 		$.ajax({
 			type: 'POST',
 			url: '/api/medications?token=' + token,
-			data: { name: medName, dose: medDose, timing: medTime, description: medDescription},
+			data: { name: medName, dose: medDose, timing: [medTime], description: medDescription},
 			dataType:'json'
 		}).done(function(data){
 			location.href = '/medications';

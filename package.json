@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha", 
+	"start": "nodemon"
   },
   "author": "D. Kain",
   "license": "ISC",

@@ -32,7 +32,7 @@ $(document).ready(function() {
             url: '/api/medications/' + id + '?token=' + token,
             data: { name: medName, 
                 dose: medDose, 
-                timing: medTime, 
+                timing: [medTime], 
                 description: medDescription },
             dataType: 'json'
         }).done(function(data) {
@@ -72,7 +72,7 @@ $(document).ready(function() {
             // if (data.error === true) {
             //     // remove the old token
             //     localStorage.removeItem('token');
-            //     location.href = '/login';
+             //     location.href = '/login';
             // }
             $("#inputName").val(data.name);
             $("#inputDose").val(data.dose);
