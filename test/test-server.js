@@ -21,7 +21,7 @@ describe('Medications', function() {
         const user = new User({ username: 'Holly', password: 'hdhdhd' });
         user.save((err) => {
             if (err) throw err;
-            user.medications.push({ name: 'Claritin', dose: 'one', timing: 'once a day', description: 'white rectangle' });
+            user.medications.push({ name: 'Claritin', dose: 'one', timing: '7 am', description: 'white rectangle' });
             user.save();
         });
     })
@@ -49,11 +49,9 @@ describe('Medications', function() {
     });
 
     it('should create a new medication on POST', function() {
-        /// how do we get the token?
-
         return chai.request(app)
             .post('/api/medications?token=' + token)
-            .send({ name: 'asprin', dose: 'one', timing: 'day', description: 'red' })
+            .send({ name: 'asprin', dose: 'one', 'timing[]': '2pm', description: 'red' })
             .then(function(res) {
                 res.should.have.status(201);
                 res.should.be.json;
@@ -84,7 +82,7 @@ describe('Medications', function() {
             .then(function(res) {
                 return chai.request(app)
                     .put(`/api/medications/${res.body.medications[0]._id}?token=${token}`)
-                    .send({ name: 'tylenol', dose: 'two', timing: 'morning', description: 'orange' })
+                    .send({ name: 'tylenol', dose: 'two', 'timing[]': '9am', description: 'orange' })
             })
             .then(function(res) {
                 res.should.have.status(200)
@@ -94,7 +92,7 @@ describe('Medications', function() {
             })
             .catch(function(err) {
                 throw (err);
-            })
+            });
     });
 
 });

@@ -81,7 +81,6 @@ app.get('/api/medications', verifyToken, (req, res) => {
 });
 
 app.post('/api/medications', verifyToken, (req, res) => {
-    console.log(req.body);
     const requiredFields = ['name', 'dose', 'timing[]', 'description'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
@@ -91,19 +90,11 @@ app.post('/api/medications', verifyToken, (req, res) => {
             return res.status(400).send(message);
         }
     }
-    /*
-    Notes: When dealing with a subdoc
-    - get the parent (user)first.
-    - we push the new information into the user.
-    - we save the parent (user)
-    */
 
     const { username } = req.decoded;
     User.findOne({ username })
         .exec()
         .then(user => {
-            // user -> parent
-            // parent.children.push
             user.medications.push({
                 name: req.body.name,
                 dose: req.body.dose,
@@ -125,7 +116,6 @@ app.post('/api/medications', verifyToken, (req, res) => {
             // res.json({error: false, medications: user.medications});
         })
         .catch(err => {
-            //console.log(err, 'error');
             res.status(500).json({ message: "Internal server error" })
         })
 
@@ -238,7 +228,6 @@ app.post('/api/authenticate', (req, res) => {
             res.json({ error: false, token: token });
         })
         .catch(err => {
-            console.log(err)
             res.status(500).json({ message: 'Failed misserably' })
         })
 });
