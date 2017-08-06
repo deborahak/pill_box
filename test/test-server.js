@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 const { app, runServer, closeServer } = require('../server');
 const { User } = require('../users/models');
-
+const { TEST_DATABASE_URL } = require('../config');
 
 const should = chai.should();
 
@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 describe('Medications', function() {
     let token = "";
     before(function() {
-        return runServer(databaseUrl = "mongodb://localhost/pill_box_test");
+        return runServer(databaseUrl = TEST_DATABASE_URL);
     });
 
     before(function() {
