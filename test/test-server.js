@@ -12,7 +12,9 @@ chai.use(chaiHttp);
 describe('Medications', function() {
     let token = "";
     before(function() {
-        return runServer(databaseUrl = TEST_DATABASE_URL);
+
+        console.log('TEST_DATABASE_URL', TEST_DATABASE_URL);
+                return runServer(databaseUrl = TEST_DATABASE_URL);
     });
 
     before(function() {
