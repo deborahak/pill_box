@@ -2,10 +2,3 @@ language: node_js
 node_js: node
 services: 
   mongodb
-deploy:
-  provider: heroku
-  api_key:
-    secure: Vbzck2/hDirGr+qSBa9y8hETciLrrXCKzaNKFjIVSdvhO96qKnmbKn/UDUCttuBj7Sqo0heAKsPeR5DzbfO3WfLmvxv/Rj+crGI8EBLN6ZEObNbX9y81csF3LWglB0xS+l5JuE61Nzz9VwcscaQFY8IBZT2VZ1je1AoUS9O0Kn4TLzyfC8agLlAnTB2JPyZsh4Bt2AmTlw/9okRFu9wXtaZhSPwarmYQnx6ILDS6Bx25z14wn4jK7JzxnQfb+O5wzhqu0FKokiUcKTqKjMqCFn59IiEr2XyXKISkUOazhsrwgw7fa8opnITsXA+KPGv3zZ0uU8Zqt58RaSHhx9qPoQxk+KQI6GRggWL5zIiMTH7R8qu/DGKGYs+nydYn+Ri7FEk/4sVHAP1OZ3aO4M2meSKZ5E/qv8aUHeMGVmOV8Azo449vFhnNeq5PxZ9h/sdUgdKYPJKGCHIPjdrY7GwoM9H7nYOtCC2GV5xYGg783J3WUHXDvasvzf9VeUuTr1gZ5+OfWJJdQo5UFAiL64NfwV//9wD6KR83i9vMy3IKqntfsltv14pepPUkIKccwmrm/q6yUJClhjRLhsJWu+7IhUC0gnkT6GvC+iaS+MB9JFJ0sG5MUmBOS1OIkCJLdK9mD1+DXfCnhohRY1jX/7tOboE5ooOmzr1XrDzO8QSz6UY=
-  app: dry-refuge-42914
-  on:
-    repo: deborahak/pill_box
