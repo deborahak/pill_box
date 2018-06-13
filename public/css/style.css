@@ -10,17 +10,30 @@
 a,
 a:focus,
 a:hover {
-  color: #678BB0;
+  color: #3e647a;
 }
 
 /* Custom default button */
 .btn-default,
 .btn-default:hover,
 .btn-default:focus {
-  color: black;
+  /*color: black;
   text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #A2E37C;
+  /*background-color: #A2E37C;
   border: 1px solid black;
+   color: #1e4669;
+    text-shadow: none;
+    /* background-color: #A2E37C; */
+  border: 1px solid #ffac45;
+  background: #ffaf4b;
+  background: -moz-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+  background: -webkit-gradient(left bottom, right top, color-stop(0%, #ffaf4b), color-stop(100%, #ff920a));
+  background: -webkit-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+  background: -o-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+  background: -ms-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+  background: linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );
+}
 }
 #delete-med {
   background-color: #92D769;
@@ -45,6 +58,11 @@ body {
   color: #62b399;
   text-align: center;
   /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
+    background-image: url("../assets/pillbox_bkgrnd.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 form {
@@ -72,11 +90,45 @@ form {
   margin-left: auto;
 }
 
-// /* Padding for spacing */
+ /* Padding for spacing */
 .inner {
   padding: 30px;
 }
+.inner.container {
+    width: 100%;
+    background: #fffffb78;
+    background: -moz-linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, #ffffff), color-stop(47%, #f6f6f6), color-stop(100%, #c6c7cc));
+    background: -webkit-linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
+    background: -o-linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
+    background: -ms-linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
+    background: linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c6c7cc', GradientType=1 );
+    height: 63px;
+    padding: 0 65px;
+    margin-bottom: 5rem;
+}
 
+.lead {
+    font-size: 45px;
+    color: #8d98a5;
+}
+
+span.pinky {
+    color: #e988bc;
+}
+ 
+span.goldy {
+    color: #caa30a;
+}
+ 
+span.lav1 {
+    color: #3379b7;
+}
+ 
+span.lav2 {
+    color: #33b7a1;
+}
 
 // /*
 //  * Header
@@ -97,7 +149,7 @@ form {
   padding-left: 0;
   font-size: 16px;
   font-weight: bold;
-  color: #678bb0; /* IE8 proofing */
+  color: #195b9f; /* IE8 proofing */
   border-bottom: 2px solid transparent;
 }
 .masthead-nav > li > a:hover,
@@ -121,7 +173,11 @@ form {
     float: right;
   }
 }
-
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 20px 15px;
+}
 
 /*
  * Cover
@@ -214,6 +270,8 @@ form {
 /* Events */
 .agenda .agenda-events {  } 
 .agenda .agenda-events .agenda-event {  } 
+
+
 
 @media (max-width: 767px) {
     
