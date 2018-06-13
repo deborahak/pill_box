@@ -11,10 +11,12 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 const { router: usersRouter } = require('./users');
 
 const { User } = require('./users/models');
+
+//app.use('/api/users/', usersRouter);
+//app.use('/api/authenticate', authRouter);
 
 mongoose.Promise = global.Promise;
 

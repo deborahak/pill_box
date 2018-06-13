@@ -9,6 +9,7 @@ const medicationSchema = mongoose.Schema({
 	dose: {type: String, required: true},
 	timing: {type: Array, required: true},
 	description: {type: String, required: true
+		// add more descriptors at a later date
 	//	color: String,
 	//	shape: String,
 	//	markings: String
@@ -25,18 +26,22 @@ medicationSchema.methods.apiRepr = function() {
 	};
 }
 
-// const Medication = mongoose.model('Medication', medicationSchema);
-
-
 const UserSchema = mongoose.Schema({
 	username: {
 		type: String,
 		required: true,
-		unique: true
+		unique: true, 
+		trim: true,
+		index: true
 	},
 	password: {
 		type: String,
-		required: true
+		trim: true,
+		required: true,
+		index: {
+			unique: true,
+			partialFilterExpression: {passwword: {$type: 'string'}}
+		}
 	},
 	firstName: {type: String, default: ""},
 	lastName: {type: String, default: ""},
@@ -61,13 +66,4 @@ UserSchema.statics.hashPassword = function(password) {
 const User = mongoose.model('User', UserSchema);
 
 module.exports = {User};
-
-
-
-
-
-
-
-
-
 
