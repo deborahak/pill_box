@@ -8,12 +8,9 @@
     background-color: #EDEDED;
     padding: 10px 20px;
     border-radius: 10px;
-    border-color:#d2d2d2;
-    border-width: 5px;
-    /*border: 5px solid #fff;*/
+    border: 5px solid #fff;
     box-shadow:0 1px 0 #cfcfcf;
     margin-top: 150px;
-    opacity: 1;
     vertical-align: middle;
 }
 
