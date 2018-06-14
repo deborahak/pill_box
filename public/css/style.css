@@ -7,10 +7,15 @@
   margin-bottom: 20px;
 }*/
 
-a,
+a:{
+  color: #337ab7;
+  text-decoration: none;
+}
+
 a:focus,
 a:hover {
   color: #3e647a;
+  text-decoration: none;
 }
 
 /* Custom default button */
@@ -53,16 +58,15 @@ a:hover {
 
 html,
 body {
-  height: 100%;
-  background-color: #fff;
-  color: #62b399;
+  background-color: #d2d994;
+  color: #3379b7;
   text-align: center;
-  /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
-    background-image: url("../assets/pillbox_bkgrnd.png");
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("../assets/pillbox_bkgrnd.png");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: 133%;
 }
 
 form {
@@ -102,7 +106,7 @@ form {
     background: -webkit-linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
     background: -o-linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
     background: -ms-linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
-    background: linear-gradient(45deg, #ffffff 0%, #f6f6f6 47%, #c6c7cc 100%);
+    background: linear-gradient(45deg, #ffffff59 0%, #f6f6f687 47%, #c6c7cc 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c6c7cc', GradientType=1 );
     height: 63px;
     padding: 0 65px;
@@ -130,6 +134,7 @@ span.lav2 {
     color: #33b7a1;
 }
 
+
 // /*
 //  * Header
 //  */
@@ -140,7 +145,7 @@ span.lav2 {
 
 .masthead-nav > li {
   display: inline-block;
-}
+  padding: 0px 9px;}
 .masthead-nav > li + li {
   margin-left: 20px;
 }
@@ -172,6 +177,11 @@ span.lav2 {
   .masthead-nav {
     float: right;
   }
+}
+
+.nav>li {
+    position: relative;
+    display: block;
 }
 .nav>li>a {
     position: relative;
