@@ -1,11 +1,19 @@
-/*body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
+/*
+ * Base structure
+ */
 
-.navbar {
-  margin-bottom: 20px;
-}*/
+html,
+body {
+  background-color: #d2d994;
+  color: #3379b7;
+  text-align: center;
+  background-image: url("../assets/pillbox_bkgrnd.png");
+  height: 100%;
+  background-position: center;
+  /*background-repeat: no-repeat;
+    background-size: cover;*/
+  background-size: 133%;
+}
 
 a:{
   color: #337ab7;
@@ -22,13 +30,6 @@ a:hover {
 .btn-default,
 .btn-default:hover,
 .btn-default:focus {
-  /*color: black;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  /*background-color: #A2E37C;
-  border: 1px solid black;
-   color: #1e4669;
-    text-shadow: none;
-    /* background-color: #A2E37C; */
   border: 1px solid #ffac45;
   background: #ffaf4b;
   background: -moz-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
@@ -39,7 +40,7 @@ a:hover {
   background: linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );
 }
-}
+
 #delete-med {
   background-color: #92D769;
   color: black;
@@ -51,24 +52,6 @@ a:hover {
   border: 1px solid black;
 }
 
-
-/*
- * Base structure
- */
-
-html,
-body {
-  background-color: #d2d994;
-  color: #3379b7;
-  text-align: center;
-  background-image: url("../assets/pillbox_bkgrnd.png");
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-size: 133%;
-}
-
 form {
   text-align: center;
   padding-top: 30px;
@@ -76,7 +59,7 @@ form {
   padding-right: 30%;
 }
 
-// /* Extra markup and styles for table-esque vertical and horizontal centering */
+ /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;
   width: 100%;
@@ -89,15 +72,12 @@ form {
   display: table-cell;
   vertical-align: top;
 }
-.cover-container {
-  margin-right: auto;
-  margin-left: auto;
-}
 
  /* Padding for spacing */
 .inner {
   padding: 30px;
 }
+
 .inner.container {
     width: 100%;
     background: #fffffb78;
@@ -114,9 +94,12 @@ form {
 }
 
 .lead {
-    font-size: 45px;
+    font-size: 40px;
     color: #8d98a5;
+    width: 52%;
+    margin: 0 auto;
 }
+
 
 span.pinky {
     color: #e988bc;
@@ -135,20 +118,22 @@ span.lav2 {
 }
 
 
-// /*
-//  * Header
-//  */
+ /*
+  * Header
+  */
 .masthead-brand {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
+h3.masthead-brand {
+    margin-bottom: 17px;
+}
+
 .masthead-nav > li {
   display: inline-block;
-  padding: 0px 9px;}
-.masthead-nav > li + li {
-  margin-left: 20px;
-}
+  padding: 10px 9px;}
+
 .masthead-nav > li > a {
   padding-right: 0;
   padding-left: 0;
@@ -160,8 +145,8 @@ span.lav2 {
 .masthead-nav > li > a:hover,
 .masthead-nav > li > a:focus {
   background-color: transparent;
-  border-bottom-color: #a9a9a9;
-  border-bottom-color: rgba(255,255,255,.25);
+  /*border-bottom-color: #a9a9a9;*/
+  border-bottom-color: rgb(209, 101, 157);
 }
 .masthead-nav > .active > a,
 .masthead-nav > .active > a:hover,
@@ -170,29 +155,32 @@ span.lav2 {
   border-bottom-color: #fff;
 }
 
-@media (min-width: 768px) {
-  .masthead-brand {
-    float: left;
-  }
-  .masthead-nav {
-    float: right;
-  }
-}
 
 .nav>li {
     position: relative;
-    display: block;
+    /*display: block;*/
 }
 .nav>li>a {
     position: relative;
     display: block;
-    padding: 20px 15px;
+   /* padding: 20px 15px;*/
 }
 
 /*
  * Cover
  */
-
+.cover {
+  margin: 0 auto;
+  padding: 6rem;
+}
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
 
 /*
  * Footer
@@ -203,48 +191,8 @@ span.lav2 {
   color: rgba(255,255,255,.5);
 }
 
-.cover {
-  padding: 0 20px;
-}
-.cover .btn-lg {
-  padding: 10px 20px;
-  font-weight: bold;
-}
+/*Schedule*/
 
-
-/*
- * Affix and center
- */
-
-@media (min-width: 768px) {
-  /* Pull out the header and footer */
-  .masthead {
-    position: fixed;
-    top: 0;
-  }
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
-  /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle;
-  }
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
-}
-
-@media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 700px;
-  }
-}
 .modal-body .form-horizontal .col-sm-2,
 .modal-body .form-horizontal .col-sm-10 {
     width: 100%
@@ -256,7 +204,6 @@ span.lav2 {
 .modal-body .form-horizontal .col-sm-offset-2 {
     margin-left: 15px;
 }
-//Schedule
 
 .agenda {  
 
@@ -281,9 +228,43 @@ span.lav2 {
 .agenda .agenda-events {  } 
 .agenda .agenda-events .agenda-event {  } 
 
+/*
+ * Affix and center
+ */
 
+@media (min-width: 768px) {
+  /* Pull out the header and footer */
+  .masthead {
+    position: fixed;
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+  .masthead-brand {
+    float: left;
+  }
+  .masthead-nav {
+    float: right;
+  }
+  /* Start the vertical centering */
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+  /* Handle the widths */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
 
-@media (max-width: 767px) {
-    
+@media (min-width: 992px) {
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 700px;
+  }
 }
 
