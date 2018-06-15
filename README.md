@@ -15,18 +15,18 @@ After surgery I found it difficult to track when I took which pills, especially 
 
 **Landing Page**
 
-![Landing page](./public/assets/screenshots/Pill_Box_Home.PNG)
-![iPhone Mockup](./public/assets/screenshots/iPhoneX_Mockup.PNG)
+![Landing page](pill_box/public/assets/screenshots/Pill_Box_Home.PNG)
+![iPhone Mockup](/public/assets/screenshots/iPhoneX_Mockup.PNG)
 
 
 **Medications**
 
-![Medication List](./public/assets/screenshots/medications_R1.PNG)
+![Medication List](/public/assets/screenshots/medications_R1.PNG)
 
 
 **Schedule**
 
-![Schedule](./public/assets/screenshots/schedule_R1.PNG)
+![Schedule](/public/assets/screenshots/schedule_R1.PNG)
 
 
 ## Technologies
