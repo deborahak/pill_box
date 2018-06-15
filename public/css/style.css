@@ -43,27 +43,37 @@ h5.mb-0 {
     margin: 20px;
 }
 
-.list-group-item:last-child {
-    margin-bottom: 0;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
     width: 75%;
     margin: 0 auto;
+
+}
+ 
+/* Custom default button */
+.btn-default {
+    color: #1e4669;
+    text-shadow: none;
+    border: 1px solid #ffac45;
+    background: #ffaf4b;
+    background: -moz-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, #ffaf4b), color-stop(100%, #ff920a));
+    background: -webkit-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+    background: -o-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+    background: -ms-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+    background: linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );
 }
 
-/* Custom default button */
-.btn-default,
-.btn-default:hover,
-.btn-default:focus {
-  border: 1px solid #ffac45;
-  background: #ffaf4b;
-  background: -moz-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
-  background: -webkit-gradient(left bottom, right top, color-stop(0%, #ffaf4b), color-stop(100%, #ff920a));
-  background: -webkit-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
-  background: -o-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
-  background: -ms-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
-  background: linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );
+.btn-default:hover, .btn-default:focus {
+    background: linear-gradient(45deg, #ffaf4b 0%, #d27807 100%);
+    color: white;
+    transition-duration: .5s;
 }
 
 .btn-link, .btn-link:active, .btn-link:focus, .btn-link:hover {
@@ -77,9 +87,16 @@ button#delete-med:focus, button#delete-med:hover {
 }
 
 #delete-med {
-  background-color: #92D769;
-  color: black;
-  border: 1px solid black;
+    color: #363533;
+    text-shadow: none;
+    background: #ff45f9;
+    background: -moz-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, #ffaf4b), color-stop(100%, #ff920a));
+    background: -webkit-linear-gradient(45deg, #ff45f9 0%, #c636c1 100%);
+    background: -o-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+    background: -ms-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
+    background: linear-gradient(45deg, #f297ef 0%, #ff4ff9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );
 }
 
 button#save-med:focus, button#save-med:hover {
@@ -91,7 +108,7 @@ button#save-med:focus, button#save-med:hover {
 #save-med {
   color: #ffffff;
   text-shadow: none;
-  border: 1px solid black;
+  border: 1px solid #3378b7;
   background: #3378b7;
   background: -moz-linear-gradient(45deg, #ffaf4b 0%, #ff920a 100%);
   background: -webkit-gradient(left bottom, right top, color-stop(0%, #ffaf4b), color-stop(100%, #ff920a));
@@ -123,7 +140,7 @@ form {
 }
 
 .form-control {
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 form.form-horizontal {
@@ -147,7 +164,6 @@ form.form-horizontal {
 .modal-footer {
     padding: 15px;
     text-align: center;
-    border-top: 1px solid #e5e5e5;
 }
  
 .middle.col-xs-8.col-sm-5.col-lg-4 {
