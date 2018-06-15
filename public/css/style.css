@@ -140,8 +140,22 @@ form {
 }
 
 .form-control {
-    border-radius: 2px;
-}
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;}
 
 form.form-horizontal {
     text-align: center;
@@ -150,6 +164,32 @@ form.form-horizontal {
     padding-right: 0;
     margin: 0 auto;
 }
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+ 
+.form-group label.add {
+    text-align: left !important;
+}
+
+form.add_med {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    margin: 85px auto;
+    width: 55%;
+    padding: 36px;
+}
+
 .modal-open .modal {
     overflow-x: hidden;
     overflow-y: auto;
