@@ -89,7 +89,7 @@ h5.mb-0 {
  
 .btn-link:focus, .btn-link:hover {
     color: #e987bd;
-    text-decoration: underline;
+    text-decoration: none;
     background-color: transparent;
     outline: 0px auto -webkit-focus-ring-color;
 }
