@@ -46,6 +46,10 @@ app.get('/add_meds', (req, res) => {
 app.get('/schedule', (req, res) => {
     res.render('schedule')
 });
+
+app.get('/learnmore', (req, res) => {
+    res.render('learnmore')
+});
 // app.get('/edit_meds/:id', (req,res)=> {
 //  // res.render('edit_meds', {
 //  //  id: req.params.id

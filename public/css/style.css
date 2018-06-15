@@ -76,8 +76,22 @@ h5.mb-0 {
     transition-duration: .5s;
 }
 
+.btn-link {
+    font-weight: 800;
+    color: #3378b7;
+    border-radius: 0;
+    font-size: 20px;
+}
+
 .btn-link, .btn-link:active, .btn-link:focus, .btn-link:hover {
     border-color: transparent;
+}
+ 
+.btn-link:focus, .btn-link:hover {
+    color: #e987bd;
+    text-decoration: underline;
+    background-color: transparent;
+    outline: 0px auto -webkit-focus-ring-color;
 }
 
 button#delete-med:focus, button#delete-med:hover {
@@ -334,6 +348,7 @@ h3.masthead-brand {
   margin: 0 auto;
   padding: 0rem 6rem;
 }
+
 .cover-container {
   margin-right: auto;
   margin-left: auto;
