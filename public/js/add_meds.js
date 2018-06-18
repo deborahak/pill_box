@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	console.log('do we work?');
-
 	$('#addMed').on('click', function(event){
 		event.preventDefault();
 		var medName = $('#medName').val();

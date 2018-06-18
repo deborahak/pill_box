@@ -1,12 +1,7 @@
 $(document).ready(function() {
-    // to paint up the clock!
-
     //  placing the med name and times.
     $.getJSON('/api/medications?token=' + token, function(data) {
-        // check for the data property error being true!
-        // if it is true, redirect the individual to login page!
-        // and for sanity's sake, delete the token
-        // console.log(data);
+
         if (data.error === true) {
             // remove the old token
             localStorage.removeItem('token');
@@ -15,10 +10,10 @@ $(document).ready(function() {
         for (var i = 1; i < 25; i++) {
             // append the "hour"
             if (i < 12) {
-                var time = i + "am";
+                var time = i + "am"; // 10am
                 $('#agenda-hours').append('<tr><td id="' + time + '" class="agenda-time">' + time + '</td><td class="agenda-events"><div class="agenda-event"></div></td></tr>')
             } else if (i === 12) {
-                var time = i + "pm";
+                var time = i + "pm"; // 10pm
                 $('#agenda-hours').append('<tr><td id="' + time + '" class="agenda-time">' + time + '</td><td class="agenda-events"><div class="agenda-event"></div></td></tr>')
 
             }

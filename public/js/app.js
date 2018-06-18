@@ -25,13 +25,6 @@ $(document).ready(function() {
         location.href = '/'; 
     });
 
-    /// click, submit, dbclick, etc.
-    // $('#deb').click(function(event){
-    // 	event.preventDefault();
-    // 	var name = $('#deb-name').val();  // how to extra data from the form input
-    // 	alert("hi there! " + name);
-    // });
-
 });
 
 

@@ -229,6 +229,11 @@ form.add_med {
     text-align: center;
 }
  
+.middle.col-xs-10.col-sm-5.col-lg-4 {
+    margin: 0 auto;
+    float: inherit;
+}
+
 .middle.col-xs-8.col-sm-5.col-lg-4 {
     margin: 0 auto;
     float: inherit;
