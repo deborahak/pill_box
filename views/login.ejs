@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/login.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -20,9 +21,9 @@
 
                 <div class="middle col-xs-10 col-sm-5 col-lg-4">
 
-                    <div class="form-login">
+                    <div class="form-login has-error">
                         <h4>Welcome back.</h4>
-                        <input type="text" id="username" class="form-control input-sm chat-input" placeholder="username" />
+                        <input type="text" id="username" class="form-control input-sm chat-input" placeholder="username" required=true />
                         </br>
                         <input type="password" id="password" class="form-control input-sm chat-input" placeholder="password" />
                         </br>
@@ -44,7 +45,9 @@
 
         </div>
       
-    <%- include('partials/scripts') %>
+      <%- include('partials/scripts') %>
+
+      <%- include('partials/footer') %>
 
     </body>
 

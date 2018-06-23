@@ -1,6 +1,6 @@
 # Pill Box
 
-This is my easy app for tracking medication, including dose and time.
+This is my easy to use app for tracking medication, including dose and time.
 
 ## Visit my Live Site
 

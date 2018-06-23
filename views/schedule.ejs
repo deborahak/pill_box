@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Schedule</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Schedule</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
 
-<body>
-    <%- include('partials/authenticated_navbar') %>
+    <body>
+        <%- include('partials/authenticated_navbar') %>
 
-    <div class="agenda">
-        <div class="table-responsive">
-            <table class="table table-condensed table-bordered">
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>Medications</th>
-                    </tr>
-                </thead>
-                <tbody id="agenda-hours" > 
+        <div class="agenda">
+            <div class="table-responsive">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Medications</th>
+                        </tr>
+                    </thead>
+                    <tbody id="agenda-hours" > 
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <%- include('partials/scripts') %>
-    <script src="js/schedule.js"></script>
-</body>
+        <%- include('partials/scripts') %>
+        <script src="js/schedule.js"></script>
+
+    </body>
+    
 </html>
