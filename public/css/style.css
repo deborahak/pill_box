@@ -428,7 +428,7 @@ footer.footer {
     line-height: 41px;
     background-color: #e2e7bd;
     opacity: .85;
-    position: absolute;
+    position: fixed;
 }
 
 footer.footer > .container {
