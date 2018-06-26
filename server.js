@@ -34,14 +34,30 @@ app.get('/signup', (req, res) => {
     res.render('signup')
 });
 
-app.get('/login', (req, res) => {
-    res.render('login')
+//updated
+app.get('/login', (req, res, next) => {
+    
+    // setTimeout(function () {
+    //   try{
+    //       throw new Error("Yikes I have a migraine!");
+    //       res.render('login');
+    //   }catch(error){
+    //       next(error);
+    //   }
+    // }, 1000);
+     
+    res.render('login');
+    next();
 });
-app.get('/medications', (req, res) => res.render('medications'))
+
+app.get('/medications', (req, res) => { 
+    res.render('medications')
+});
 
 app.get('/add_meds', (req, res) => {
     res.render('add_meds')
 });
+
 app.get('/schedule', (req, res) => {
     res.render('schedule')
 });
@@ -49,6 +65,7 @@ app.get('/schedule', (req, res) => {
 app.get('/learnmore', (req, res) => {
     res.render('learnmore')
 });
+
 // app.get('/edit_meds/:id', (req,res)=> {
 //  // res.render('edit_meds', {
 //  //  id: req.params.id
@@ -216,7 +233,7 @@ app.get('/api/medications/:id', verifyToken, (req, res) => {
         .catch(err => res.status(500).json({ message: 'Internal server error' }))
 });
 
-app.post('/api/authenticate', (req, res) => {
+app.post('/api/authenticate', (req, res, next) => {
 
     User
         .findOne({ username: req.body.username, password: req.body.password })
@@ -224,16 +241,20 @@ app.post('/api/authenticate', (req, res) => {
         .exec()
         .then(user => {
             if (!user) {
-                return res.status(404).json({ 'message': 'User not found' })
+                // res.sendStatus(404).json({ 'message': 'User not found' });
+                res.json({ 'message': '*Required - Use Demo Credentials' });
+                next();
+            } else {
+                let token = jwt.sign(user, jwt_secret, {
+                    expiresIn: "1440m"
+                });
+                // res.json({ error: false, token: token, 'message': 'User found' });
+                res.json({ error: false, token: token });
             }
-            let token = jwt.sign(user, jwt_secret, {
-                expiresIn: "1440m"
-            });
-
-            res.json({ error: false, token: token });
         })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed misserably' })
+        .catch(error => {
+            // res.sendStatus(500).json({ message: 'Failed misserably' })
+            res.sendStatus(500).send(error)
         })
 });
 
@@ -290,4 +311,10 @@ if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
 
+app.use(function(error, req, res, next){
+    console.error(error);
+    res.send("Time for another aspirin!!!")
+});
+
 module.exports = { app, runServer, closeServer };
+
