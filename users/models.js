@@ -48,6 +48,14 @@ const UserSchema = mongoose.Schema({
 	medications: [medicationSchema]
 });
 
+// UserSchema.post('save', function(error, doc, next) {
+// 	if (error.username === 'MongoError') {
+// 		next(new Error('Username cannot be blank'));
+// 	} else {
+// 		next(error);
+// 	}
+// })
+
 UserSchema.methods.apiRepr = function() {
 	return {
 		username: this.username || '',
