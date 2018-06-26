@@ -8,8 +8,11 @@ let verifyToken = require('./middlewares/verifyToken');
 
 const app = express();
 app.use(express.static('public'));
+//app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+//const validator = require('bootstrap-validator');
 
 const { router: usersRouter } = require('./users');
 

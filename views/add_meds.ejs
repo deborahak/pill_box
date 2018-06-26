@@ -6,31 +6,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Add Medication</title>
         <%- include('partials/header') %>
+        <%- include('partials/scripts') %>
     </head>
 
     <body>
         <%- include('partials/authenticated_navbar') %>
 
-        <form data-toggle="validator" role="form" class="add_med">
+        <form role="form" class="add_med">
             <h4 class="modal-title" id="myModalLabel">
             Add Medication
             </h4>
 
-            <div class="form-group" id="add-med">
-                <label class="add" for="medName">Name of Medication <span>*</span></label>
-                <input type="name" placeholder=" required   --Aspirin, antibiotic, etc. " class="form-control" id="medName" data-error="You must give it a name" required>
+            <div class="form-group">
+                <label for="medName">Name of Medication <span>*</span></label>
+                <input type="name" placeholder=" required   --Aspirin, antibiotic, etc. " class="form-control" id="medName">
                 <div class="help-block with-errors"></div>
             </div>
          
-            <div class="form-group" id="dose">
+            <div class="form-group">
                 <label for="medDose">Dosage <span>*</span></label>
-                <input type="dosage" placeholder="required  -- 10ml, 500mg, 1 tsp" class="form-control" id="medDose" required>
+                <input type="dosage" placeholder="required  -- 10ml, 500mg, 1 tsp" class="form-control" id="medDose" >
                 <div class="help-block with-errors"></div>
             </div>
 
-            <div class="form-group" id="timing">
+            <div class="form-group">
                 <label for="medTime">Time to Take Medication <span>*</span></label>
-                <select type="timing" class="form-control" id="medTime" required>
+                <select type="timing" class="form-control" id="medTime" >
                     <option>5 am</option>
                     <option>6 am</option>
                     <option>7 am</option>
@@ -60,9 +61,9 @@
                 <!-- <input type="timing" placeholder="required  8am, 2pm, 10pm" class="form-control" id="medTime">  -->
             </div>
 
-            <div class="form-group" id="description">
+            <div class="form-group">
                 <label for="medDescription">Description of Medication <span>*</span></label>
-                <input type="description" placeholder="required  -- pink oval, liquid in fridge, round and white" class="form-control" id="medDescription" required>
+                <input type="description" placeholder="required  -- pink oval, liquid in fridge, round and white" class="form-control" id="medDescription" >
                 <div class="help-block with-errors"></div>
             </div>
 
@@ -70,7 +71,6 @@
 
         </form>
      
-        <%- include('partials/scripts') %>
 
         <script src="js/add_meds.js"></script>
         
