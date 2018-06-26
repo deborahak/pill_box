@@ -22,7 +22,6 @@ mongoose.Promise = global.Promise;
 
 const { PORT, DATABASE_URL, jwt_secret } = require('./config');
 
-
 app.set('view engine', 'ejs');
 
 
