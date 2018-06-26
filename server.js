@@ -8,11 +8,14 @@ let verifyToken = require('./middlewares/verifyToken');
 
 const app = express();
 app.use(express.static('public'));
-//app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//const validator = require('bootstrap-validator');
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 const { router: usersRouter } = require('./users');
 
@@ -38,10 +41,14 @@ app.get('/signup', (req, res) => {
     res.render('signup')
 });
 
-app.get('/login', (req, res) => {
-    res.render('login')
+app.get('/login', (req, res, next) => {
+    res.render('login');
+    next();
 });
-app.get('/medications', (req, res) => res.render('medications'))
+
+app.get('/medications', (req, res) => {
+    res.render('medications')
+});
 
 app.get('/add_meds', (req, res) => {
     res.render('add_meds')
@@ -228,7 +235,9 @@ app.post('/api/authenticate', (req, res, next) => {
         .exec()
         .then(user => {
             if (!user) {
-                return res.status(404).json({ 'message': 'User not found' })
+                // res.status(404).json({ 'message': 'User not found' })
+                res.json({'message': '*Required'});
+                next();
             }
             let token = jwt.sign(user, jwt_secret, {
                 expiresIn: "1440m"
@@ -237,11 +246,12 @@ app.post('/api/authenticate', (req, res, next) => {
             res.json({ error: false, token: token });
         })
         .catch(err => {
-            res.status(500).json({ message: 'Failed misserably' })
+            //res.status(500).json({ message: 'Failed misserably' });
+            res.sendStatus(500).send(error);
         })
 });
 
-app.post('/api/signup', (req, res) => {
+app.post('/api/signup', (req, res, next) => {
     let user = new User({
         username: req.body.username,
         password: req.body.password
@@ -251,8 +261,13 @@ app.post('/api/signup', (req, res) => {
             console.log(err);
             return res.json({ error: true, message: 'Unsuccessful' })
         }
+        next();
         res.status(201).json({ error: false, message: 'New user created' })
     })
+    // .catch(err => {
+    //         //res.status(500).json({ message: 'Failed misserably' });
+    //     res.sendStatus(500).send(error);
+    // });
 });
 
 let server;
