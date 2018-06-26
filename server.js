@@ -271,12 +271,13 @@ app.post('/api/signup', (req, res) => {
         username: req.body.username,
         password: req.body.password
     });
-    user.save(function(err, data) {
+    user.save(function(err, data, next) {
         if (err) {
             console.log(err);
-            return res.json({ error: true, message: 'Unsuccessful' })
+            return res.json({ error: true, message: '*Required' });
+            next();
         }
-        res.status(201).json({ error: false, message: 'New user created' })
+        res.status(400).json({ error: true, message: '*Requried Needed' })
     })
 });
 
@@ -326,4 +327,3 @@ app.use(function(req, res, next) {
 });
 
 module.exports = { app, runServer, closeServer };
-

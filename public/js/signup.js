@@ -10,8 +10,28 @@ $(document).ready(function(){
 			url: '/api/signup',
 			data: { username: username, password: password},
 			dataType: 'json'
-		}).done(function(data){
-			location.href = '/medications';
-		})
-	});	
-});
+		}).done(function(data) {
+	      console.log(data.message);
+	      
+	      if (data.message) {
+	        console.log("error!");
+	        $('.error').html( data.message );
+	        $( '#logged' ).addClass( "has-error" ); 
+
+	        // optional styling on input
+	        var $inputs = $(".form-login input");      
+	        $inputs.on("input", function() {
+	            var $filled = $inputs.filter(function() { return this.value.trim().length > 0; });
+	          $('#logged').toggleClass('has-error', $filled.length > 0);
+	          $('#submitLogin').click(function() {
+	              $inputs.val('').trigger('input');
+	          });
+	        });
+	      } else { 
+	        localStorage.setItem('token', data.token);			
+					location.href = '/medications';
+				}
+		})	
+	});
+
+})
