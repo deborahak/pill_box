@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	$('#signUp').click(function(event){
 		event.preventDefault();
 		var username = $('#username').val();

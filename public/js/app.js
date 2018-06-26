@@ -12,7 +12,7 @@ $(document).ready(function() {
             url: '/api/authenticate',
             data: { username: username, password: password },
             dataType: 'json'
-        }).done(function(data) {
+        }).then(function(data) {
             console.log(data.message);
             if (data.message){
                 console.log("error!");
@@ -22,7 +22,7 @@ $(document).ready(function() {
                 // optional styling on input
                 var $inputs = $(".form-login input");      
                 $inputs.on("input", function() {
-                var $filled = $inputs.filter(function() { return this.value.trim().length > 0; });
+                  var $filled = $inputs.filter(function() { return this.value.trim().length > 0; });
                 $('#logged').toggleClass('has-error', $filled.length > 0);
                 $('#submitLogin').click(function() {
                     $inputs.val('').trigger('input');
@@ -45,6 +45,6 @@ $(document).ready(function() {
 
 
 // function getSchedule() {
-//     //when you click on the med, you should get the Schedule (name, dosage, and time)
+//   when you click on the med, you should get the Schedule (name, dosage, and time)
 
 // }

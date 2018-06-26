@@ -11,6 +11,14 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 const { router: usersRouter } = require('./users');
 
 const { User } = require('./users/models');
@@ -241,20 +249,20 @@ app.post('/api/authenticate', (req, res, next) => {
         .exec()
         .then(user => {
             if (!user) {
-                // res.sendStatus(404).json({ 'message': 'User not found' });
+                // res.send(404).json({ 'message': 'User not found' });
                 res.json({ 'message': '*Required - Use Demo Credentials' });
                 next();
-            } else {
+            } 
                 let token = jwt.sign(user, jwt_secret, {
                     expiresIn: "1440m"
                 });
-                // res.json({ error: false, token: token, 'message': 'User found' });
+                 // res.json({ error: false, token: token, 'message': 'User found' });
                 res.json({ error: false, token: token });
-            }
+            
         })
         .catch(error => {
             // res.sendStatus(500).json({ message: 'Failed misserably' })
-            res.sendStatus(500).send(error)
+            res.sendStatus(500).send(error);
         })
 });
 
@@ -311,9 +319,10 @@ if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
 
-app.use(function(error, req, res, next){
-    console.error(error);
-    res.send("Time for another aspirin!!!")
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 
 module.exports = { app, runServer, closeServer };
