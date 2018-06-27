@@ -12,7 +12,7 @@ $(document).ready(function() {
             url: '/api/authenticate',
             data: { username: username, password: password },
             dataType: 'json'
-        }).then(function(data) {
+        }).done(function(data) {
             if (data.message){
                 console.log('error');
                 $('.error').html(data.message);

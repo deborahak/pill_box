@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Log In</title>
         <%- include('partials/header') %>
-        <%- include('partials/scripts') %>
     </head>
 
     <body>
@@ -21,17 +20,18 @@
 
                     <div id="logged" class="form-login">
                         <h4>Welcome back.</h4>
-                        <h6 class="error"></h6>
                         <label for="name">Your Username <span>*</span></label>                        
                         <input type="text" id="username" class="form-control input-sm chat-input" placeholder="username" required=true />
+                        <h6 class="error"></h6>
                         </br>
+                        <label for="password">Your Password <span>*</span></label>        
                         <input type="password" id="password" class="form-control input-sm chat-input" placeholder="password" required=true />
                         <h6 class="error"></h6>
                         </br>
 
                         <div class="wrapper">
                             <span class="group-btn">     
-                                <a href="#" class="btn btn-default btn-md" id="submitLogin">login <i class="fa fa-sign-in"></i></a>
+                                <a href="#" class="btn btn-default btn-md" id="submitLogin">login</a>
                             </span>
                         </div>
 
@@ -45,7 +45,8 @@
             </div>
 
         </div>
-      
+
+        <%- include('partials/scripts') %>
         <script src="js/app.js"></script>
       <%- include('partials/footer') %>
 

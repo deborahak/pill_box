@@ -9,8 +9,8 @@ $(document).ready(function(){
 			url: '/api/signup',
 			data: { username: username, password: password},
 			dataType: 'json'
-		})
-		.then(function(data){
+		}).done(function(data){
+
             if (data.message){
                 console.log('error');
                 $('.error').html(data.message);
@@ -26,6 +26,7 @@ $(document).ready(function(){
                 });
             } else {
               localStorage.setItem('token', data.token);
+
 			  location.href = '/medications';
 			}
 		})	

@@ -256,12 +256,16 @@ app.post('/api/signup', (req, res, next) => {
         username: req.body.username,
         password: req.body.password
     });
-    user.save(function(err, data) {
+    user.save(function(err, data, next) {
+        // if (!user) {
+        //     res.json({'message': '*Required'});
+        //     next();
+        // }
         if (err) {
             console.log(err);
             return res.json({ error: true, message: 'Unsuccessful' })
+            next();
         }
-        next();
         res.status(201).json({ error: false, message: 'New user created' })
     })
     // .catch(err => {
