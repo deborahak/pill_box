@@ -277,7 +277,7 @@ app.post('/api/signup', (req, res) => {
             return res.json({ error: true, message: '*Required' });
             next();
         }
-        res.status(400).json({ error: true, message: '*Requried Needed' })
+        res.status(400).json({ error: false, message: '*Requried Needed' })
     })
 });
 
