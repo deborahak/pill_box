@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	$('#addMed').on('click', function(event){
 		event.preventDefault();
+		console.log(event);
 		var medName = $('#medName').val();
 		var medDose = $('#medDose').val();
 		var medTime = $('#medTime').val();

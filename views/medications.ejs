@@ -36,7 +36,7 @@
                   <form class="form-horizontal" role="form">
                     <div class="form-group">
                       <label  class="col-sm-2 control-label"
-                        for="name">Name
+                        for="name">Name <span>*</span>
                       </label>
                       <div class="col-sm-10">
                           <input type="name" class="form-control" 
@@ -46,7 +46,7 @@
 
                     <div class="form-group">
                       <label class="col-sm-2 control-label"
-                            for="dose" >Dosage
+                            for="dose" >Dosage <span>*</span>
                       </label>
                       <div class="col-sm-10">
                           <input type="dose" class="form-control"
@@ -55,18 +55,43 @@
                     </div>
 
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label"
-                                for="timing">Timing
+                      <label class="col-sm-2 control-label" for="timing">Timing <span>*</span>
                       </label>
                       <div class="col-sm-10">
-                          <input type="timing" class="form-control" 
-                          id="inputTiming" placeholder="Timing"/>
+<!--                         <input type="timing" class="form-control" id="inputTiming" placeholder="Timing" /> -->
+                          <select type="timing" class="form-control" 
+                          id="inputTiming" placeholder="Timing">
+                            <option>5 am</option>
+                            <option>6 am</option>
+                            <option>7 am</option>
+                            <option>8 am</option>
+                            <option>9 am</option>
+                            <option>10 am</option>
+                            <option>11 am</option>
+                            <option>12 pm</option>
+                            <option>1 pm</option>
+                            <option>2 pm</option>
+                            <option>3 pm</option>
+                            <option>4 pm</option>
+                            <option>5 pm</option>
+                            <option>6 pm</option>
+                            <option>7 pm</option>
+                            <option>8 pm</option>
+                            <option>9 pm</option>
+                            <option>10 pm</option>
+                            <option>11 pm</option>
+                            <option>12 am</option>
+                            <option>1 am</option>
+                            <option>2 am</option>
+                            <option>3 am</option>
+                            <option>4 am</option>
+                          </select>                          
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label  class="col-sm-2 control-label"
-                                for="description">Description
+                                for="description">Description <span>*</span>
                       </label>
                       <div class="col-sm-10">
                           <input type="description" class="form-control" 
@@ -94,8 +119,8 @@
     </div>
 
   	<%- include('partials/scripts') %>
+    <script src="js/app.js"></script>
     <script src="js/medications.js"></script>
-
     <%- include('partials/footer') %>
 
   </body>

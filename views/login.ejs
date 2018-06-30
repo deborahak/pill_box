@@ -18,16 +18,20 @@
 
                 <div class="middle col-xs-10 col-sm-5 col-lg-4">
 
-                    <div class="form-login has-error">
+                    <div id="logged" class="form-login">
                         <h4>Welcome back.</h4>
+                        <label for="name">Your Username <span>*</span></label>                        
                         <input type="text" id="username" class="form-control input-sm chat-input" placeholder="username" required=true />
+                        <h6 class="error"></h6>
                         </br>
-                        <input type="password" id="password" class="form-control input-sm chat-input" placeholder="password" />
+                        <label for="password">Your Password <span>*</span></label>        
+                        <input type="password" id="password" class="form-control input-sm chat-input" placeholder="password" required=true />
+                        <h6 class="error"></h6>
                         </br>
 
                         <div class="wrapper">
                             <span class="group-btn">     
-                                <a href="#" class="btn btn-default btn-md" id="submitLogin">login <i class="fa fa-sign-in"></i></a>
+                                <a href="#" class="btn btn-default btn-md" id="submitLogin">login</a>
                             </span>
                         </div>
 
@@ -41,9 +45,9 @@
             </div>
 
         </div>
-      
-      <%- include('partials/scripts') %>
 
+        <%- include('partials/scripts') %>
+        <script src="js/app.js"></script>
       <%- include('partials/footer') %>
 
     </body>
