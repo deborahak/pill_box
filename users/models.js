@@ -9,7 +9,7 @@ const medicationSchema = mongoose.Schema({
 	// might be a bug for name
 	dose: {type: String, required: true, trim: true, default: ''},
 	timing: {type: Array, required: true, trim: true, default: ''},
-	description: {type: String, required: true, trim: true, default: ''
+	description: {type: String, required: true, trim: true, default: ''}
 })
 
 medicationSchema.methods.apiRepr = function() {
