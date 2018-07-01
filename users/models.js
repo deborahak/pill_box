@@ -5,15 +5,10 @@ mongoose.Promise = global.Promise;
 
 const medicationSchema = mongoose.Schema({
 
-	name: {type: String, required: true},
-	dose: {type: String, required: true},
-	timing: {type: Array, required: true},
-	description: {type: String, required: true
-		// add more descriptors at a later date
-	//	color: String,
-	//	shape: String,
-	//	markings: String
-	}
+	name: {type: String, required: false, default: '', unique: false},
+	dose: {type: String, required: false,  default: '', unique: false},
+	timing: {type: Array, required: false,  default: '', unique: false},
+	description: {type: String, required: false,  default: '', unique: false}
 })
 
 medicationSchema.methods.apiRepr = function() {
@@ -31,7 +26,8 @@ const UserSchema = mongoose.Schema({
 		type: String,
 		required: true,
 		trim: true,
-		index: true
+		index: true,
+		sparse: true
 	},
 	password: {
 		type: String,

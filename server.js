@@ -100,7 +100,7 @@ app.post('/api/medications', verifyToken, (req, res) => {
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
-            const message = `Missing \`${field}\` in request body`
+            const message = `Missing \`${field}\` in request body`;
             console.error(message);
             return res.status(400).send(message);
         }
@@ -122,10 +122,10 @@ app.post('/api/medications', verifyToken, (req, res) => {
             user.save(function(err) {
 
                 if (err) {
-                    console.log(err, 'error')
-                    return res.status(500).json({ message: "Medication already listed." })
+                    console.log(err, 'error');
+                    return res.status(500).json({ message: "Medication already listed." });
                 }
-                res.status(201).json(medication)
+                res.status(201).json(medication);
 
             })
             // res.json({error: false, medications: user.medications});
@@ -262,10 +262,10 @@ app.post('/api/signup', (req, res, next) => {
         // }
         if (err) {
             console.log(err);
-            return res.json({ error: true, message: 'Unsuccessful' })
+            return res.json({ error: true, message: '*Required' })
             next();
         }
-        res.status(201).json({ error: false, message: 'New user created' })
+        res.status(201).json({ error: false });
     })
     // .catch(err => {
     //         //res.status(500).json({ message: 'Failed misserably' });
