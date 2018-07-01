@@ -5,10 +5,10 @@ mongoose.Promise = global.Promise;
 
 const medicationSchema = mongoose.Schema({
 
-	name: {type: String, required: true},
-	dose: {type: String, required: true},
-	timing: {type: Array, required: true},
-	description: {type: String, required: true
+	name: {type: String, required: false, unique: false, trim: true, default: ''},
+	dose: {type: String, required: true, trim: true, default: ''},
+	timing: {type: Array, required: true, trim: true, default: ''},
+	description: {type: String, required: true, trim: true, default: ''
 		// add more descriptors at a later date
 	//	color: String,
 	//	shape: String,
@@ -38,7 +38,7 @@ const UserSchema = mongoose.Schema({
 		trim: true,
 		required: true,
 		index: {
-			partialFilterExpression: {passwword: {$type: 'string'}}
+			partialFilterExpression: {password: {$type: 'string'}}
 		}
 	},
 	firstName: {type: String, default: ""},

@@ -43,7 +43,7 @@ app.get('/signup', (req, res) => {
 
 app.get('/login', (req, res, next) => {
     res.render('login');
-    next();
+    //next();
 });
 
 app.get('/medications', (req, res) => {
@@ -263,7 +263,7 @@ app.post('/api/signup', (req, res, next) => {
         // }
         if (err) {
             console.log(err);
-            return res.json({ error: true, message: 'Unsuccessful' })
+            return res.json({ error: true, message: '*Required' })
             next();
         }
         res.status(201).json({ error: false, message: 'New user created' })
@@ -312,5 +312,11 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 module.exports = { app, runServer, closeServer };
