@@ -21,9 +21,6 @@ const { router: usersRouter } = require('./users');
 
 const { User } = require('./users/models');
 
-//app.use('/api/users/', usersRouter);
-//app.use('/api/authenticate', authRouter);
-
 mongoose.Promise = global.Promise;
 
 const { PORT, DATABASE_URL, jwt_secret } = require('./config');
@@ -42,7 +39,7 @@ app.get('/signup', (req, res) => {
 
 app.get('/login', (req, res, next) => {
     res.render('login');
-    next();
+    //next();
 });
 
 app.get('/medications', (req, res) => {
@@ -52,6 +49,7 @@ app.get('/medications', (req, res) => {
 app.get('/add_meds', (req, res) => {
     res.render('add_meds')
 });
+
 app.get('/schedule', (req, res) => {
     res.render('schedule')
 });
@@ -59,6 +57,7 @@ app.get('/schedule', (req, res) => {
 app.get('/learnmore', (req, res) => {
     res.render('learnmore')
 });
+
 // app.get('/edit_meds/:id', (req,res)=> {
 //  // res.render('edit_meds', {
 //  //  id: req.params.id
@@ -77,21 +76,7 @@ app.get('/api/medications', verifyToken, (req, res) => {
         .exec()
         .then(user => {
             res.json({ error: false, medications: user.medications });
-        }).catch(err => res.status(500).json({ message: "Internal server error" }));;
-    // Medication
-    //  .find(filters)
-    //  .limit(15)
-    //  .exec()
-    //  .then(medications => {
-    //      res.json({error: false,
-    //          medications: medications.map(
-    //              (medication) => medication.apiRepr())
-    //      });
-    //  })
-    //  .catch(err => {
-    //      console.error(err);
-    //      res.status(500).json({message: 'Internal server error'})
-    //  });
+        }).catch(err => res.status(500).json({ message: "Internal server error" }));
 });
 
 app.post('/api/medications', verifyToken, (req, res) => {
@@ -127,36 +112,15 @@ app.post('/api/medications', verifyToken, (req, res) => {
                 res.status(201).json(medication);
 
             })
-            // res.json({error: false, medications: user.medications});
         })
         .catch(err => {
             res.status(500).json({ message: "Internal server error" })
         })
 
-
-    // Medication
-    //  .create({
-    //      name: req.body.name,
-    //      dose: req.body.dose,
-    //      timing: req.body.timing,
-    //      description: req.body.description})
-    //  .then(
-    //      medication => res.status(201).json(medication))
-    //  .catch(err => {
-    //      console.error(err);
-    //      res.status(500).json({message: "Entry already exists"})
-    //  })
 });
 
 
 app.put('/api/medications/:id', verifyToken, (req, res) => {
-    // if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    //     const message = (
-    //         `Request path id (${req.params.id}) and request body id` +
-    //         `(${req.body.id}) must match`);
-    //     console.error(message);
-    //     res.status(400).json({ message: message });
-    // }
 
     const toUpdate = {};
     const updateableFields = ['name', 'dose', 'timing', 'description'];
@@ -166,6 +130,7 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
             toUpdate[field] = req.body[field];
         }
     });
+
     const { username } = req.decoded;
     User.findOne({ username })
         .exec()
@@ -186,9 +151,6 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
 
         })
         .catch(err => res.status(500).json({ message: 'Internal server error' }))
-    //      .exec()
-    //      .then(medication => res.status(204).end())
-    //      .catch(err => res.status(500).json({message: 'Internal server error'}))
 });
 
 app.delete('/api/medications/:id', verifyToken, (req, res) => {
@@ -202,24 +164,15 @@ app.delete('/api/medications/:id', verifyToken, (req, res) => {
         }
     )
 
-    // User.findOne({ username })
-    // .exec()
-    // .then((user) => {
-
-    //  res.status(204).end()
-    // })
-    // .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
 
+// Is this a duplicat function?
 app.get('/api/medications/:id', verifyToken, (req, res) => {
     const { username } = req.decoded; // username = req.decoded.username; 
     User.findOne({ username }) // {username: username}
         .exec()
         .then((user) => {
             const medication = user.medications.id(req.params.id);
-            // medication.name = 'ljljasfa'
-            // melj
-            // user.save()
             res.json(medication);
         })
         .catch(err => res.status(500).json({ message: 'Internal server error' }))
@@ -255,10 +208,6 @@ app.post('/api/signup', (req, res, next) => {
         password: req.body.password
     });
     user.save(function(err, data, next) {
-        // if (!user) {
-        //     res.json({'message': '*Required'});
-        //     next();
-        // }
         if (err) {
             console.log(err);
             return res.json({ error: true, message: '*Required' })
@@ -266,10 +215,6 @@ app.post('/api/signup', (req, res, next) => {
         }
         res.status(201).json({ error: false });
     })
-    // .catch(err => {
-    //         //res.status(500).json({ message: 'Failed misserably' });
-    //     res.sendStatus(500).send(error);
-    // });
 });
 
 let server;
@@ -310,5 +255,11 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 module.exports = { app, runServer, closeServer };

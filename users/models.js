@@ -5,10 +5,11 @@ mongoose.Promise = global.Promise;
 
 const medicationSchema = mongoose.Schema({
 
-	name: {type: String, required: true, default: '', unique: false},
-	dose: {type: String, required: false,  default: '', unique: false},
-	timing: {type: Array, required: false,  default: '', unique: false},
-	description: {type: String, required: false,  default: '', unique: false}
+	name: {type: String, required: false, unique: false, trim: true, default: ''},
+	// might be a bug for name
+	dose: {type: String, required: true, trim: true, default: ''},
+	timing: {type: Array, required: true, trim: true, default: ''},
+	description: {type: String, required: true, trim: true, default: ''
 })
 
 medicationSchema.methods.apiRepr = function() {
@@ -33,21 +34,13 @@ const UserSchema = mongoose.Schema({
 		trim: true,
 		required: true,
 		index: {
-			partialFilterExpression: {passwword: {$type: 'string'}}
+			partialFilterExpression: {password: {$type: 'string'}}
 		}
 	},
 	firstName: {type: String, default: ""},
 	lastName: {type: String, default: ""},
 	medications: [medicationSchema]
 });
-
-// UserSchema.post('save', function(error, doc, next) {
-// 	if (error.username === 'MongoError') {
-// 		next(new Error('Username cannot be blank'));
-// 	} else {
-// 		next(error);
-// 	}
-// })
 
 UserSchema.methods.apiRepr = function() {
 	return {
