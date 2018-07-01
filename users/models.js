@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 
 const medicationSchema = mongoose.Schema({
 
-	name: {type: String, required: false, default: '', unique: false},
+	name: {type: String, required: true, default: '', unique: false},
 	dose: {type: String, required: false,  default: '', unique: false},
 	timing: {type: Array, required: false,  default: '', unique: false},
 	description: {type: String, required: false,  default: '', unique: false}
@@ -26,8 +26,7 @@ const UserSchema = mongoose.Schema({
 		type: String,
 		required: true,
 		trim: true,
-		index: true,
-		sparse: true
+		index: true
 	},
 	password: {
 		type: String,

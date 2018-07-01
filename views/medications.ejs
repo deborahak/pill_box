@@ -14,13 +14,12 @@
 
     <div class='container'>
   		<ul id="medications" class="list-group"></ul>
-      <a href="/add_meds" class='btn btn-default'>Add Medication</a>
+      <a href="/add_meds" class='btn btn-default'>Add Medicationn</a>
     </div>
 
     <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
-
               <div class="modal-header">
                   <button type="button" class="close" 
                      data-dismiss="modal">
@@ -33,85 +32,84 @@
               </div>
 
               <div class="modal-body">                
-                  <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label"
-                        for="name">Name <span>*</span>
-                      </label>
-                      <div class="col-sm-10">
-                          <input type="name" class="form-control" 
-                          id="inputName" placeholder="Name"/>
-                      </div>
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label"
+                      for="name">Name <span>*</span>
+                    </label>
+                    <div class="col-sm-10">
+                      <input type="name" class="form-control" 
+                      id="inputName" placeholder="Name"/>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                          for="dose" >Dosage <span>*</span>
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="dose" class="form-control"
+                            id="inputDose" placeholder="Dose"/>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="timing">Timing <span>*</span>
+                    </label>
+                    <div class="col-sm-10">
+                        <select type="timing" class="form-control" 
+                        id="inputTiming" placeholder="Timing">
+                          <option>5 am</option>
+                          <option>6 am</option>
+                          <option>7 am</option>
+                          <option>8 am</option>
+                          <option>9 am</option>
+                          <option>10 am</option>
+                          <option>11 am</option>
+                          <option>12 pm</option>
+                          <option>1 pm</option>
+                          <option>2 pm</option>
+                          <option>3 pm</option>
+                          <option>4 pm</option>
+                          <option>5 pm</option>
+                          <option>6 pm</option>
+                          <option>7 pm</option>
+                          <option>8 pm</option>
+                          <option>9 pm</option>
+                          <option>10 pm</option>
+                          <option>11 pm</option>
+                          <option>12 am</option>
+                          <option>1 am</option>
+                          <option>2 am</option>
+                          <option>3 am</option>
+                          <option>4 am</option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label"
+                      for="description">Description <span>*</span>
+                    </label>
+                    <div class="col-sm-10">
+                      <input type="description" class="form-control" 
+                      id="inputDescription" placeholder="Description"/>
                     </div>
 
-                    <div class="form-group">
-                      <label class="col-sm-2 control-label"
-                            for="dose" >Dosage <span>*</span>
-                      </label>
-                      <div class="col-sm-10">
-                          <input type="dose" class="form-control"
-                              id="inputDose" placeholder="Dose"/>
-                      </div>
-                    </div>
+                    <input type="hidden" id="medication-id" value="">
+                  </div>
 
-                    <div class="form-group">
-                      <label class="col-sm-2 control-label" for="timing">Timing <span>*</span>
-                      </label>
-                      <div class="col-sm-10">
-<!--                         <input type="timing" class="form-control" id="inputTiming" placeholder="Timing" /> -->
-                          <select type="timing" class="form-control" 
-                          id="inputTiming" placeholder="Timing">
-                            <option>5 am</option>
-                            <option>6 am</option>
-                            <option>7 am</option>
-                            <option>8 am</option>
-                            <option>9 am</option>
-                            <option>10 am</option>
-                            <option>11 am</option>
-                            <option>12 pm</option>
-                            <option>1 pm</option>
-                            <option>2 pm</option>
-                            <option>3 pm</option>
-                            <option>4 pm</option>
-                            <option>5 pm</option>
-                            <option>6 pm</option>
-                            <option>7 pm</option>
-                            <option>8 pm</option>
-                            <option>9 pm</option>
-                            <option>10 pm</option>
-                            <option>11 pm</option>
-                            <option>12 am</option>
-                            <option>1 am</option>
-                            <option>2 am</option>
-                            <option>3 am</option>
-                            <option>4 am</option>
-                          </select>                          
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label"
-                                for="description">Description <span>*</span>
-                      </label>
-                      <div class="col-sm-10">
-                          <input type="description" class="form-control" 
-                          id="inputDescription" placeholder="Description"/>
-                      </div>
-
-                      <input type="hidden" id="medication-id" value="">
-                    </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default"
-                          data-dismiss="modal">
-                              Close
-                      </button>
-                      <button type="button" class="btn btn" id="delete-med">Delete Med
-                      </button>
-                      <button type="button" class="btn btn" id="save-med">Save
-                      </button>
-                    </div>
-                  </form>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                          Close
+                    </button>
+                    <button type="button" class="btn btn" id="delete-med">Delete Med
+                    </button>
+                    <button type="button" class="btn btn" id="save-med">Save
+                    </button>
+                  </div>
+                </form>
               </div>
 
           </div>    

@@ -69,9 +69,8 @@ app.get('/learnmore', (req, res) => {
 /// API Endpoints!!!
 app.get('/api/medications', verifyToken, (req, res) => {
     const filters = {};
-    if (req.query.name) {
-        // TODO -> figure out if you need to filter a medication
-        filters['name'] = req.query['name'];
+    if (req.query._id) {
+        filters['_id'] = req.query['_id'];
     }
     const { username } = req.decoded;
     User.findOne({ username }) // User.find( { username: username })

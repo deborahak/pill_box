@@ -140,7 +140,7 @@ button#save-med:focus, button#save-med:hover {
     transition-duration: .5s;
 }
 
-#save-med {
+#save-med, #addMed {
   color: #ffffff;
   text-shadow: none;
   border: 1px solid #3378b7;

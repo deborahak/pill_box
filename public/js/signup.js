@@ -26,7 +26,7 @@ $(document).ready(function(){
           });
       } else {
         localStorage.setItem('token', data.token);
-  			location.href = '/medications';
+  			location.href = '/login';
 			}
 		})	
 	});
