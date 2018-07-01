@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 
 const medicationSchema = mongoose.Schema({
 
-	name: {type: String, required: false, unique: false, trim: true, default: ''},
+	name: {type: String, required: true, unique: false, trim: true, default: ''},
 	// might be a bug for name
 	dose: {type: String, required: true, trim: true, default: ''},
 	timing: {type: Array, required: true, trim: true, default: ''},

@@ -86,36 +86,37 @@ app.post('/api/medications', verifyToken, (req, res) => {
         if (!(field in req.body)) {
             const message = `Missing \`${field}\` in request body`;
             console.error(message);
-            return res.status(400).send(message);
+            return res.json({ error: true, 'message': message});
         }
     }
 
     const { username } = req.decoded;
-    User.findOne({ username })
-        .exec()
-        .then(user => {
-            user.medications.push({
-                name: req.body.name,
-                dose: req.body.dose,
-                timing: req.body['timing[]'],
-                description: req.body.description
-            });
-            // pick out the last medication
-            const medication = user.medications[user.medications.length - 1];
+    // User.findOne({ username })
+    //     .exec()
+    //     .then(user => {
+    //         user.medications.push({
+    //             name: req.body.name,
+    //             dose: req.body.dose,
+    //             timing: req.body['timing[]'],
+    //             description: req.body.description
+    //         });
+    //         // pick out the last medication
+    //         // const medication = user.medications[user.medications.length - 1];
 
-            user.save(function(err) {
+    //         user.save(function(err) {
 
-                if (err) {
-                    console.log(err, 'error');
-                    return res.status(500).json({ message: "Medication already listed." });
-                }
-                res.status(201).json(medication);
+    //             if (err) {
+    //                 console.log(err, 'error');
+    //                 return res.status(500).json({ message: "Medication already listed." });
+    //             }
+    //             // res.status(201).json(medication);
+    //             res.status(201).json({ error: false });
 
-            })
-        })
-        .catch(err => {
-            res.status(500).json({ message: "Internal server error" })
-        })
+    //         })
+    //     })
+    //     .catch(err => {
+    //         res.status(500).json({ message: "Internal server error" })
+    //     })
 
 });
 
