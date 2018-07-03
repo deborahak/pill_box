@@ -14,7 +14,18 @@ $(document).ready(function(){
 			data: { name: medName, dose: medDose, timing: [medTime], description: medDescription},
 			dataType:'json'
 		}).done(function(data){
-			location.href = '/medications';
-		})
+				console.log(data);
+				if (data.message){
+      		console.log('error');
+      		console.log(data);
+      		$('.error').html('*Required');
+      		$('#add').addClass('has-error');
+      	
+
+
+      	} else {
+			  location.href = '/medications';
+		  	}
+		 })
 	})
 })

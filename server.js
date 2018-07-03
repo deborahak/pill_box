@@ -107,7 +107,9 @@ app.post('/api/medications', verifyToken, (req, res) => {
 
                 if (err) {
                     console.log(err, 'error');
-                    return res.status(500).json({ message: "Medication already listed." });
+                    // return res.status(500).json({ message: "Medication already listed." });
+                    return res.json({ message: '*Required' });
+
                 }
                 // res.status(201).json(medication);
                 res.status(201).json({ error: false });
