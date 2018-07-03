@@ -147,7 +147,8 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
             user.save((err) => {
                 if (err) {
                     console.log(err);
-                    return res.status(500).json({ message: 'Internal server error' })
+                    // return res.status(500).json({ message: 'Internal server error' });
+                    return res.json({ message: '*Required' });
                 }
                 return res.json(medication);
             });

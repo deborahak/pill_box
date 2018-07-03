@@ -15,6 +15,7 @@ $(document).ready(function() {
 
     $('#save-med').on('click', function(event) {
         event.preventDefault();
+        console.log(event);
         var medName = $('#inputName').val();
         var medDose = $('#inputDose').val();
         var medTime = $('#inputTiming').val();
@@ -24,13 +25,27 @@ $(document).ready(function() {
         $.ajax({
             type: 'PUT',
             url: '/api/medications/' + id + '?token=' + token,
-            data: { name: medName, 
-                dose: medDose, 
-                timing: [medTime], 
-                description: medDescription },
-            dataType: 'json'
+            data: { name: medName, dose: medDose, timing: [medTime], description: medDescription},
+            dataType:'json'
         }).done(function(data) {
+            console.log(data);            
+            if (data.message){
+                console.log('error');
+                console.log(data);
+                $('.error').html('*Required');
+                $('#add').addClass('has-error');
+
+                var $inputs = $(".form-horizontal input");
+                $inputs.on("input", function() {
+                    var $filled = $inputs.filter(function() {return this.value.trim().length > 0;});
+                    $('#edit').toggleClass('has-error', $filled.length > 0);
+                    $('#save-med').click(function() {
+                        $inputs.trigger('input');
+                    });
+                });       
+            } else {
             location.href = '/medications';
+            }
         })
     });
 
