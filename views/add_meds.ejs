@@ -58,7 +58,6 @@
                     <option>3 am</option>
                     <option>4 am</option>
                 </select>
-                <div class="help-block with-errors"></div>
 
             </div>
 
@@ -66,15 +65,17 @@
                 <label for="medDescription">Description of Medication <span>*</span></label>
                 <input type="description" placeholder="required  -- pink oval, liquid in fridge, round and white" class="form-control" id="medDescription" >
                 <div class="help-block with-errors"></div>
-                <h6 class="error"></h6>                
+
+                <h6 class="error"></h6>
             </div>
 
             <div class="modal-footer">
                 <a href="/medications"><button type="button" class="btn btn-default">
                       &#9668; Back To Meds
                 </button></a>
-            <button type="submit" class="btn btn-default" id="addMed">Add the Med</button>
-
+                
+                <button type="submit" class="btn btn-default" id="addMed">Add the Med</button>
+            </div>
         </form>
      
         <%- include('partials/scripts') %>

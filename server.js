@@ -49,6 +49,7 @@ app.get('/medications', (req, res) => {
 app.get('/add_meds', (req, res) => {
     res.render('add_meds')
 });
+
 app.get('/schedule', (req, res) => {
     res.render('schedule')
 });
@@ -56,6 +57,7 @@ app.get('/schedule', (req, res) => {
 app.get('/learnmore', (req, res) => {
     res.render('learnmore')
 });
+
 // app.get('/edit_meds/:id', (req,res)=> {
 //  // res.render('edit_meds', {
 //  //  id: req.params.id
@@ -66,9 +68,8 @@ app.get('/learnmore', (req, res) => {
 /// API Endpoints!!!
 app.get('/api/medications', verifyToken, (req, res) => {
     const filters = {};
-    if (req.query.name) {
-        // TODO -> figure out if you need to filter a medication
-        filters['name'] = req.query['name'];
+    if (req.query._id) {
+        filters['_id'] = req.query['_id'];
     }
     const { username } = req.decoded;
     User.findOne({ username }) // User.find( { username: username })
@@ -83,7 +84,7 @@ app.post('/api/medications', verifyToken, (req, res) => {
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
-            const message = `Missing \`${field}\` in request body`
+            const message = `Missing \`${field}\` in request body`;
             console.error(message);
             return res.json({ error: true, 'message': message});
         }
@@ -105,28 +106,25 @@ app.post('/api/medications', verifyToken, (req, res) => {
             user.save(function(err) {
 
                 if (err) {
-                    console.log(err, 'error')
-                    // return res.status(500).json({ message: "Medication already listed." })
-                    return res.json({ message: '* Required' });
+
+                    console.log(err, 'error');
+                    // return res.status(500).json({ message: "Medication already listed." });
+                    return res.json({ message: '*Required' });
+
                 }
-                res.status(201).json({error: false});
+                // res.status(201).json(medication);
+                res.status(201).json({ error: false });
 
             })
         })
         .catch(err => {
             res.status(500).json({ message: "Internal server error" })
         })
+
 });
 
 
 app.put('/api/medications/:id', verifyToken, (req, res) => {
-    // if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    //     const message = (
-    //         `Request path id (${req.params.id}) and request body id` +
-    //         `(${req.body.id}) must match`);
-    //     console.error(message);
-    //     res.status(400).json({ message: message });
-    // }
 
     const toUpdate = {};
     const updateableFields = ['name', 'dose', 'timing', 'description'];
@@ -136,6 +134,7 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
             toUpdate[field] = req.body[field];
         }
     });
+
     const { username } = req.decoded;
     User.findOne({ username })
         .exec()
@@ -149,7 +148,8 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
             user.save((err) => {
                 if (err) {
                     console.log(err);
-                    return res.status(500).json({ message: 'Internal server error' })
+                    // return res.status(500).json({ message: 'Internal server error' });
+                    return res.json({ message: '*Required' });
                 }
                 return res.json(medication);
             });
@@ -171,6 +171,7 @@ app.delete('/api/medications/:id', verifyToken, (req, res) => {
 
 });
 
+// Is this a duplicat function?
 app.get('/api/medications/:id', verifyToken, (req, res) => {
     const { username } = req.decoded; // username = req.decoded.username; 
     User.findOne({ username }) // {username: username}
@@ -217,7 +218,7 @@ app.post('/api/signup', (req, res, next) => {
             return res.json({ error: true, message: '*Required' })
             next();
         }
-        res.status(201).json({ error: false, message: 'New user created' })
+        res.status(201).json({ error: false });
     })
 });
 

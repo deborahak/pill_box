@@ -6,6 +6,7 @@ mongoose.Promise = global.Promise;
 const medicationSchema = mongoose.Schema({
 
 	name: {type: String, required: true, unique: false, trim: true, default: ''},
+	// might be a bug for name
 	dose: {type: String, required: true, trim: true, default: ''},
 	timing: {type: Array, required: true, trim: true, default: ''},
 	description: {type: String, required: true, trim: true, default: ''}
@@ -40,14 +41,6 @@ const UserSchema = mongoose.Schema({
 	lastName: {type: String, default: ""},
 	medications: [medicationSchema]
 });
-
-// UserSchema.post('save', function(error, doc, next) {
-// 	if (error.username === 'MongoError') {
-// 		next(new Error('Username cannot be blank'));
-// 	} else {
-// 		next(error);
-// 	}
-// })
 
 UserSchema.methods.apiRepr = function() {
 	return {
