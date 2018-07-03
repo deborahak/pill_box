@@ -14,7 +14,25 @@ $(document).ready(function(){
 			data: { name: medName, dose: medDose, timing: [medTime], description: medDescription},
 			dataType:'json'
 		}).done(function(data){
-			location.href = '/medications';
+			console.log(data);
+			if(data.message) {
+				console.log('error');
+				console.log(data);
+			$('.error').html('* Required');
+      		$('#add').addClass('has-error');
+
+			var $inputs = $(".add_med input");
+         $inputs.on("input", function() {
+            var $filled = $inputs.filter(function() {return this.value.trim().length > 0;});
+          		$('#add').toggleClass('has-error', $filled.length > 0);
+          		$('#addMed').click(function() {
+             	 $inputs.val('').trigger('input');
+          		});
+          	});      	
+
+			} else {
+				location.href = '/medications';
+			}
 		})
 	})
 })

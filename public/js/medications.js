@@ -1,9 +1,5 @@
 $(document).ready(function() {
-    /// if there is no token, (a.k.a. logged out)
-    /// redirect the person to the login page
     $.getJSON('/api/medications?token=' + token, function(data) {
-        // if data property is true, redirect the individual to login page!
-        // and for sanity's sake, delete the token
         if (data.error === true) {
             // remove the old token
             localStorage.removeItem('token');
@@ -34,7 +30,23 @@ $(document).ready(function() {
                 description: medDescription },
             dataType: 'json'
         }).done(function(data) {
-            location.href = '/medications';
+            if (data.message){
+                console.log('error');
+                console.log(data);
+                $('.error').html('* Required');
+                $('#add').addClass('has-error');
+
+                var $inputs = $(".form-horizontal input");
+                $inputs.on("input", function() {
+                    var $filled = $inputs.filter(function() {return this.value.trim().length > 0;});
+                    $('#edit').toggleClass('has-error', $filled.length > 0);
+                    $('#save-med').click(function() {
+                        $inputs.trigger('input');
+                        });
+                    });       
+                } else {
+                location.href = '/medications';
+                }
         })
     });
 
@@ -60,11 +72,7 @@ $(document).ready(function() {
         $.getJSON('/api/medications/' + id + '?token=' + token, function(data) {
 
             console.log(data);
-            // if (data.error === true) {
-            //     // remove the old token
-            //     localStorage.removeItem('token');
-            //     location.href = '/login';
-            // }
+
             $("#inputName").val(data.name);
             $("#inputDose").val(data.dose);
             $("#inputTiming").val(data.timing);

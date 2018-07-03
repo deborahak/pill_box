@@ -11,7 +11,7 @@
     <body>
         <%- include('partials/authenticated_navbar') %>
 
-        <form role="form" class="add_med">
+        <form id="add" role="form" class="add_med">
             <h4 class="modal-title" id="myModalLabel">
             Add Medication
             </h4>
@@ -20,12 +20,14 @@
                 <label for="medName">Name of Medication <span>*</span></label>
                 <input type="name" placeholder=" required   --Aspirin, antibiotic, etc. " class="form-control" id="medName">
                 <div class="help-block with-errors"></div>
+                <h6 class="error"></h6>
             </div>
          
             <div class="form-group">
                 <label for="medDose">Dosage <span>*</span></label>
                 <input type="dosage" placeholder="required  -- 10ml, 500mg, 1 tsp" class="form-control" id="medDose" >
                 <div class="help-block with-errors"></div>
+                <h6 class="error"></h6>
             </div>
 
             <div class="form-group">
@@ -57,15 +59,20 @@
                     <option>4 am</option>
                 </select>
                 <div class="help-block with-errors"></div>
-                <!-- <input type="timing" placeholder="required  8am, 2pm, 10pm" class="form-control" id="medTime">  -->
+
             </div>
 
             <div class="form-group">
                 <label for="medDescription">Description of Medication <span>*</span></label>
                 <input type="description" placeholder="required  -- pink oval, liquid in fridge, round and white" class="form-control" id="medDescription" >
                 <div class="help-block with-errors"></div>
+                <h6 class="error"></h6>                
             </div>
 
+            <div class="modal-footer">
+                <a href="/medications"><button type="button" class="btn btn-default">
+                      &#9668; Back To Meds
+                </button></a>
             <button type="submit" class="btn btn-default" id="addMed">Add the Med</button>
 
         </form>

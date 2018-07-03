@@ -21,13 +21,9 @@ const { router: usersRouter } = require('./users');
 
 const { User } = require('./users/models');
 
-//app.use('/api/users/', usersRouter);
-//app.use('/api/authenticate', authRouter);
-
 mongoose.Promise = global.Promise;
 
 const { PORT, DATABASE_URL, jwt_secret } = require('./config');
-
 
 app.set('view engine', 'ejs');
 
@@ -79,21 +75,7 @@ app.get('/api/medications', verifyToken, (req, res) => {
         .exec()
         .then(user => {
             res.json({ error: false, medications: user.medications });
-        }).catch(err => res.status(500).json({ message: "Internal server error" }));;
-    // Medication
-    //  .find(filters)
-    //  .limit(15)
-    //  .exec()
-    //  .then(medications => {
-    //      res.json({error: false,
-    //          medications: medications.map(
-    //              (medication) => medication.apiRepr())
-    //      });
-    //  })
-    //  .catch(err => {
-    //      console.error(err);
-    //      res.status(500).json({message: 'Internal server error'})
-    //  });
+        }).catch(err => res.status(500).json({ message: "Internal server error" }));
 });
 
 app.post('/api/medications', verifyToken, (req, res) => {
@@ -103,7 +85,7 @@ app.post('/api/medications', verifyToken, (req, res) => {
         if (!(field in req.body)) {
             const message = `Missing \`${field}\` in request body`
             console.error(message);
-            return res.status(400).send(message);
+            return res.json({ error: true, 'message': message});
         }
     }
 
@@ -118,36 +100,22 @@ app.post('/api/medications', verifyToken, (req, res) => {
                 description: req.body.description
             });
             // pick out the last medication
-            const medication = user.medications[user.medications.length - 1];
+            // const medication = user.medications[user.medications.length - 1];
 
             user.save(function(err) {
 
                 if (err) {
                     console.log(err, 'error')
-                    return res.status(500).json({ message: "Medication already listed." })
+                    // return res.status(500).json({ message: "Medication already listed." })
+                    return res.json({ message: '* Required' });
                 }
-                res.status(201).json(medication)
+                res.status(201).json({error: false});
 
             })
-            // res.json({error: false, medications: user.medications});
         })
         .catch(err => {
             res.status(500).json({ message: "Internal server error" })
         })
-
-
-    // Medication
-    //  .create({
-    //      name: req.body.name,
-    //      dose: req.body.dose,
-    //      timing: req.body.timing,
-    //      description: req.body.description})
-    //  .then(
-    //      medication => res.status(201).json(medication))
-    //  .catch(err => {
-    //      console.error(err);
-    //      res.status(500).json({message: "Entry already exists"})
-    //  })
 });
 
 
@@ -188,9 +156,6 @@ app.put('/api/medications/:id', verifyToken, (req, res) => {
 
         })
         .catch(err => res.status(500).json({ message: 'Internal server error' }))
-    //      .exec()
-    //      .then(medication => res.status(204).end())
-    //      .catch(err => res.status(500).json({message: 'Internal server error'}))
 });
 
 app.delete('/api/medications/:id', verifyToken, (req, res) => {
@@ -204,13 +169,6 @@ app.delete('/api/medications/:id', verifyToken, (req, res) => {
         }
     )
 
-    // User.findOne({ username })
-    // .exec()
-    // .then((user) => {
-
-    //  res.status(204).end()
-    // })
-    // .catch(err => res.status(500).json({ message: 'Internal server error' }));
 });
 
 app.get('/api/medications/:id', verifyToken, (req, res) => {
@@ -219,9 +177,6 @@ app.get('/api/medications/:id', verifyToken, (req, res) => {
         .exec()
         .then((user) => {
             const medication = user.medications.id(req.params.id);
-            // medication.name = 'ljljasfa'
-            // melj
-            // user.save()
             res.json(medication);
         })
         .catch(err => res.status(500).json({ message: 'Internal server error' }))
@@ -257,10 +212,6 @@ app.post('/api/signup', (req, res, next) => {
         password: req.body.password
     });
     user.save(function(err, data, next) {
-        // if (!user) {
-        //     res.json({'message': '*Required'});
-        //     next();
-        // }
         if (err) {
             console.log(err);
             return res.json({ error: true, message: '*Required' })
@@ -268,10 +219,6 @@ app.post('/api/signup', (req, res, next) => {
         }
         res.status(201).json({ error: false, message: 'New user created' })
     })
-    // .catch(err => {
-    //         //res.status(500).json({ message: 'Failed misserably' });
-    //     res.sendStatus(500).send(error);
-    // });
 });
 
 let server;
